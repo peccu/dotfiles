@@ -1,0 +1,9 @@
+# for name session in hardstatus
+hardstatus alwayslastline "$__session_name: %-w%{=b bw}%n %t%{-}%+w"
+# for scroll
+termcapinfo xterm* ti@:te@
+# set escape key to C-t
+escape ^Tt
+# charset
+defencoding utf8
+encoding utf8 utf8
