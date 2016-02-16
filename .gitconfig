@@ -7,13 +7,17 @@
     # 上の省略形
     gr = !"git graph"
     st = status
-    cm = commit
+    cm = commit --no-status
     # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
     stt = status -uno
     # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
     difff = diff --word-diff
+    # ファイル名のみの差分を表示する
+    difff = diff --name-only
     # staged diff
     diffs = diff --cached
+    dp = diff --no-prefix
+    dsp = diff --cached --no-prefix
     co = checkout
     logg = log --graph --all --decorate
     log1 = log --pretty='format:%C(yellow)%h%Creset %C(magenta)%cd%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset%C(black bold)%ar%Creset' --date=iso
@@ -28,6 +32,14 @@
     sgraph = !"git log --oneline --graph"
     ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -n 1' -
     log = log --graph
+    unstage = reset HEAD
+    showsha = rev-parse HEAD
+    showshashort = rev-parse --short HEAD
+    showbranch = symbolic-ref -q HEAD
+    cp = cherry-pick
+    ffs = flow feature start
+    sp = stash pop
+    ss = stash save
 [branch "master"]
     mergeoptions = --no-ff
 [core]
