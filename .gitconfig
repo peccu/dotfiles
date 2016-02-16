@@ -41,7 +41,7 @@
     sp = stash pop
     ss = stash save
 [branch "master"]
-    mergeoptions = --no-ff
+    mergeoptions = --ff-only
 [core]
     gitProxy = gitproxy-socat
     quotepath = false
