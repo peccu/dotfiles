@@ -1,0 +1,45 @@
+;;; -*- coding:utf-8; mode:Lisp  -*-
+
+(in-package :lem)
+(define-key *global-keymap* "C-_" 'undo)
+
+;; ;; Key Bindings
+;; (define-command split-3-window-horizontally () ()
+;;   (let ((w-width (window-width)))
+;;     (split-active-window-horizontally)
+;;     (shrink-window-horizontally (- (window-width) (floor (/ w-width 3))))
+;;     (other-window)
+;;     (split-active-window-horizontally)
+;;     (other-window)
+;;     (other-window -2)))
+
+;; (define-key *global-keymap* "M-o" 'other-window)
+;; (define-key *global-keymap* "M-i" 'delete-other-windows)
+;; (define-key *global-keymap* "M-u" 'split-active-window-vertically)
+;; (define-key *global-keymap* "M-U" 'split-3-window-horizontally)
+;; (define-key *global-keymap* "M-z" 'query-replace)
+;; (define-key *global-keymap* "C-x l" 'start-lisp-repl)
+
+;; ;;; syntax highlight
+;; ;; see (apropos "attribute")
+;; (setf *enable-syntax-highlight* t)
+;; (setf (attribute-fg-color *syntax-keyword-attribute*) "magenta")
+;; (setf (attribute-bold-p *syntax-keyword-attribute*) t)
+;; (setf (attribute-bold-p *syntax-function-name-attribute*) t)
+;; (setf (attribute-fg-color *syntax-comment-attribute*) "cyan")
+;; (setf (attribute-fg-color *syntax-constant-attribute*) "green")
+;; (setf (attribute-fg-color *syntax-string-attribute*) "yellow")
+;; (setf (attribute-fg-color *syntax-variable-attribute*) nil)
+;; (setf (attribute-fg-color *mark-overlay-attribute*) nil)
+;; (setf (attribute-reverse-p *mark-overlay-attribute*) t)
+
+(in-package :lem.lisp-mode)
+
+;; (define-command scroll-up-one-line   () () (scroll-up 2))
+;; (define-command scroll-down-one-line () () (scroll-up -2))
+;; (define-key *lisp-mode-keymap* "M-p" 'scroll-up-one-line)
+;; (define-key *lisp-mode-keymap* "M-n" 'scroll-down-one-line)
+
+(define-key *lisp-mode-keymap* "C-x C-e" 'lisp-eval-last-sexp)
+(define-key *lisp-mode-keymap* "M-;" 'lisp-comment-region)
+(define-key *lisp-mode-keymap* "M-:" 'lisp-uncomment-region)
