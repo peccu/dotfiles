@@ -2,6 +2,7 @@
 
 (in-package :lem)
 (define-key *global-keymap* "C-_" 'undo)
+(define-key *global-keymap* "C-x u" 'undo)
 
 ;; ;; Key Bindings
 ;; (define-command split-3-window-horizontally () ()
@@ -33,7 +34,7 @@
 ;; (setf (attribute-fg-color *mark-overlay-attribute*) nil)
 ;; (setf (attribute-reverse-p *mark-overlay-attribute*) t)
 
-(in-package :lem.lisp-mode)
+(in-package :lem-lisp-mode)
 
 ;; (define-command scroll-up-one-line   () () (scroll-up 2))
 ;; (define-command scroll-down-one-line () () (scroll-up -2))
