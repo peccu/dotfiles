@@ -30,6 +30,9 @@
     log3 = log --graph --date-order -C -M --pretty=format:"<%h> %ad [%an] %Cgreen%d%Creset %s" --all --date=short
     log4 = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
     sgraph = !"git log --oneline --graph"
+    # branch tag only graph
+    # https://stackoverflow.com/a/9726638/514411
+    bg = log --graph --simplify-by-decoration --pretty=format:'%C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --all
     ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -n 1' -
     log = log --graph
     unstage = reset HEAD
