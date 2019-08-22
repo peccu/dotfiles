@@ -7,11 +7,12 @@
     # 上の省略形
     gr = !"git graph"
     st = status
+    stl = lfs status
     cm = commit --no-status
     # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
     stt = status -uno
     # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
-    difff = diff --word-diff
+    diffw = diff --word-diff
     # ファイル名のみの差分を表示する
     difff = diff --name-only
     # staged diff
@@ -33,6 +34,9 @@
     log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)― %an%C(reset)' --abbrev-commit
     log3 = log --graph --date-order -C -M --pretty=format:"<%h> %ad [%an] %Cgreen%d%Creset %s" --all --date=short
     log4 = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
+    # from https://bluz71.github.io/2018/06/03/git-shortcuts_bash_tips.html
+    # and for with fzf
+    ll = log --graph --format='%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)'
     sgraph = !"git log --oneline --graph"
     # branch tag only graph
     # https://stackoverflow.com/a/9726638/514411
@@ -45,12 +49,15 @@
     showbranch = symbolic-ref -q HEAD
     cp = cherry-pick
     ffs = flow feature start
+    fff = flow feature finish
     sp = stash pop
     ss = stash save
     # with fzf: https://qiita.com/yukiarrr/items/9c21d97f6c8ac31de157#4-stash一覧をもっと見やすくしたい
     sl = !git stash list | fzf --preview 'echo {} | grep -o stash@{.*} | xargs git stash show -p --color=always' --height 90% | grep -o stash@{.*}
     sa = !git sl | xargs git stash apply
     sd = !git sl | xargs git stash drop
+    b = branch
+    bn = !"git rev-parse --abbrev-ref HEAD|tr -d \\\\r\\\\n"
 [branch "master"]
     mergeoptions = --ff-only
 [core]
