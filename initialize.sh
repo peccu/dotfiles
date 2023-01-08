@@ -3,7 +3,7 @@
 # initialize dot files
 
 detectpath(){
-    let binpath
+    let binpath=.
     if [ "$HOME" == "/project/home/peccu" ]
     then
       binpath=~/.nix-project/bin
