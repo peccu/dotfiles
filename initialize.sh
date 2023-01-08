@@ -2,6 +2,27 @@
 # -*- shell-script -*-
 # initialize dot files
 
+detectpath(){
+    let binpath
+    if [ "$HOME" == "/project/home/peccu" ]
+    then
+      binpath=~/.nix-project/bin
+    fi
+    if [ "$USER" == "codespace" ]
+    then
+      binpath=~/.local/bin
+    fi
+    echo $binpath
+}
+echo "bin path is: $(detectpath)"
+if ! which chezmoi >/dev/null 2>&1
+then
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $(detectpath)
+fi
+chezmoi init https://github.com/peccu/dot.git
+# chezmoi init peccu
+echo check chezmoi diff and apply
+
 ### Use chezmoi
 ## install
 # sh -c "$(curl -fsLS get.chezmoi.io)" -- -b path/to/bin
