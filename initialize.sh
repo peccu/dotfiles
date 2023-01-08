@@ -20,6 +20,7 @@ echo "bin path is: $(detectpath)"
 if ! which chezmoi >/dev/null 2>&1
 then
   sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $(detectpath)
+  hash -r
 fi
 chezmoi init peccu
 echo check chezmoi diff and apply
