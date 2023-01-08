@@ -3,9 +3,9 @@ LICENSE
 initialize.sh
 {{ if ne .chezmoi.hostname "home" -}}
 # only for home machine
-dot_lemrc
-dot_screenrc
-dot_tmux.conf
+.lemrc
+.screenrc
+.tmux.conf
 {{- end }}
 {{ if ne .chezmoi.homeDir "/project/home/peccu" -}}
 # only for codesandbox
