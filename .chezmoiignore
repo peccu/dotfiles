@@ -1,3 +1,18 @@
 README.md
 LICENSE
 initialize.sh
+{{- if ne .chezmoi.hostname "work-laptop" }}
+.work # only manage .work on work-laptop
+{{- end }}
+{{- if ne .chezmoi.hostname "home" }}
+# only for home machine
+dot_lemrc
+dot_screenrc
+dot_tmux.conf
+{{- end }}
+{{- if ne .chezmoi.homeDir "/project/home/peccu" }}
+# only for codesandbox
+{{- end }}
+{{- if ne .chezmoi.username "codespace" }}
+# only for codespace
+{{- end }}
