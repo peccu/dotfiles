@@ -19,17 +19,16 @@ if ! which chezmoi >/dev/null 2>&1
 then
   sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $(detectpath)
 fi
-chezmoi init https://github.com/peccu/dot.git
-# chezmoi init peccu
+chezmoi init peccu
 echo check chezmoi diff and apply
 
 ### Use chezmoi
 ## install
 # sh -c "$(curl -fsLS get.chezmoi.io)" -- -b path/to/bin
 ## init into ~/.local/share/chezmoi
-# chezmoi init https://github.com/peccu/dot.git
-## or with dotfiles repo and remove sources (--one-shot)
-# chezmoi init --apply peccu
+# chezmoi init https://github.com/peccu/dotfiles.git
+## or with dotfiles repo and apply and remove sources (--one-shot)
+# chezmoi init --apply --one-shot peccu
 ## show diff
 # chezmoi diff
 ## apply (n: dry-run, v: verbose)
