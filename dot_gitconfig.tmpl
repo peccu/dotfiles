@@ -62,13 +62,19 @@
     mergeoptions = --ff-only
 [core]
     gitProxy = gitproxy-socat
-    quotepath = false
-    editor = emacs
+    quotepath = off
 [color]
     diff = auto
     status = auto
     branch = auto
 [credential]
+{{- if eq .chezmoi.homeDir "/project/home/peccu" }}
+    helper = "!f() { echo \"username=$(cat ~/.githubtoken)\npassword=\"; }; f"
+{{- end }}
+{{- if ne .chezmoi.homeDir "/project/home/peccu" }}
     helper = store
+{{- end }}
 [push]
     default = simple
+[pull]
+    rebase = false
