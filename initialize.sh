@@ -6,7 +6,7 @@ detectpath(){
     local binpath=.
     if [ "$HOME" == "/project/home/peccu" ]
     then
-      binpath=~/.nix-project/bin
+      binpath=~/.nix-profile/bin
     fi
     if [ "$USER" == "codespace" ]
     then
