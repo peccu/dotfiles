@@ -1,7 +1,6 @@
-## this is enviroment specific
-#[user]
-#    name = peccu
-#    email = peccul@gmail.com
+[user]
+    name = {{ .name }}
+    email = {{ .email }}
 [alias]
     # いい感じのグラフでログを表示
     graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h%Creset %cd %Cblue%cn%Creset %s%Cred%d%Creset'
