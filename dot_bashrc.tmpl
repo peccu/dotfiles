@@ -113,6 +113,9 @@ if ! shopt -oq posix; then
 fi
 
 {{- if eq .chezmoi.username "codespace" }}
+# use Codespace for EDITOR
+export EDITOR="code --wait"
+
 # Codespaces bash prompt theme
 __bash_prompt() {
     local userpart='`export XIT=$? \
