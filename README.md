@@ -1,7 +1,8 @@
 # dotfiles
+
 my dot files with chezmoi
 
-# Usage
+## Usage
 
 ```bash
 curl -fsLS bit.ly/dot-ini | bash
