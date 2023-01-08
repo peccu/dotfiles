@@ -4,10 +4,12 @@
 
 detectpath(){
     local binpath=.
+    # for Codesandbox
     if [ "$HOME" == "/project/home/peccu" ]
     then
       binpath=~/.nix-profile/bin
     fi
+    # for Codespace
     if [ "$USER" == "codespace" ]
     then
       binpath=~/.local/bin
