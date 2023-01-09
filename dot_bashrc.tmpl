@@ -112,7 +112,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-{{- if eq .chezmoi.username "codespace" }}
+{{- if eq .env "codespace" }}
 # use Codespace for EDITOR
 export EDITOR="code --wait"
 

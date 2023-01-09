@@ -1,15 +1,13 @@
 README.md
 LICENSE
 initialize.sh
-{{ if ne .chezmoi.hostname "home" -}}
+{{ if ne .env "home" -}}
 # only for home machine
 .lemrc
 .screenrc
 .tmux.conf
-{{- end }}
-{{ if ne .chezmoi.homeDir "/project/home/peccu" -}}
+{{- else if ne .env "codesandbox" -}}
 # only for codesandbox
-{{- end }}
-{{ if ne .chezmoi.username "codespace" -}}
+{{- else if ne .env "codespace" -}}
 # only for codespace
 {{- end }}

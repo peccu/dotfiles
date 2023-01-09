@@ -68,10 +68,9 @@
     status = auto
     branch = auto
 [credential]
-{{- if eq .chezmoi.homeDir "/project/home/peccu" }}
+{{- if eq .env "codesandbox" }}
     helper = "!f() { echo \"username=$(cat ~/.githubtoken)\npassword=\"; }; f"
-{{- end }}
-{{- if ne .chezmoi.homeDir "/project/home/peccu" }}
+{{- else }}
     helper = store
 {{- end }}
 [push]
