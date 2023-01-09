@@ -140,3 +140,13 @@ __bash_prompt() {
 __bash_prompt
 export PROMPT_DIRTRIM=4
 {{- end }}
+
+exists() {
+    which $1 >/dev/null 2>&1
+}
+
+# chezmoi completion
+if exists chezmoi
+then
+  eval "$(chezmoi completion bash)"
+fi
