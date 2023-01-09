@@ -1,63 +1,6 @@
 [user]
     name = {{ .name }}
     email = {{ .email }}
-[alias]
-    # いい感じのグラフでログを表示
-    graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h%Creset %cd %Cblue%cn%Creset %s%Cred%d%Creset'
-    # 上の省略形
-    gr = !"git graph"
-    st = status
-    stl = lfs status
-    cm = commit --no-status
-    # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
-    stt = status -uno
-    # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
-    diffw = diff --word-diff
-    # ファイル名のみの差分を表示する
-    difff = diff --name-only
-    # staged diff
-    diffs = diff --cached
-    dp = diff --no-prefix
-    dsp = diff --cached --no-prefix
-    # with fzf: https://qiita.com/yukiarrr/items/9c21d97f6c8ac31de157#2-差分の内容をもっと見やすくしたい
-    d = "!f() { args=$@; [ -z \"$args\" ] && args=HEAD; ([ \"$args\" = \"HEAD\" ] && git status --short || git diff --name-status $args | sed 's/\t/  /') | fzf --preview \"echo {} | cut -c 4- | xargs git diff --color=always $args --\" --multi --height 90% | cut -c 4-; }; f"
-    # co = checkout
-    # with fzf: https://qiita.com/yukiarrr/items/9c21d97f6c8ac31de157#1-branch一覧から選んでcheckoutしたい
-    co = "!f() { args=$@; if [ -z \"$args\" ]; then branch=$(git branch --all | grep -v HEAD | fzf --preview 'echo {} | cut -c 3- | xargs git log --color=always' | cut -c 3-); git checkout $(echo $branch | sed 's#remotes/[^/]*/##'); else git checkout $args; fi }; f"
-    logg = log --graph --all --decorate
-    log1 = log --pretty='format:%C(yellow)%h%Creset %C(magenta)%cd%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset%C(black bold)%ar%Creset' --date=iso
-    # lg = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr:%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    # lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-    lg = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr:%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=iso
-    lga = !"git lg --all"
-    log0 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
-    log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)― %an%C(reset)' --abbrev-commit
-    log3 = log --graph --date-order -C -M --pretty=format:"<%h> %ad [%an] %Cgreen%d%Creset %s" --all --date=short
-    log4 = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
-    # from https://bluz71.github.io/2018/06/03/git-shortcuts_bash_tips.html
-    # and for with fzf
-    ll = log --graph --format='%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)'
-    sgraph = !"git log --oneline --graph"
-    # branch tag only graph
-    # https://stackoverflow.com/a/9726638/514411
-    bg = log --graph --simplify-by-decoration --pretty=format:'%C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --all
-    ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -n 1' -
-    log = log --graph
-    unstage = reset HEAD
-    showsha = rev-parse HEAD
-    showshashort = rev-parse --short HEAD
-    showbranch = symbolic-ref -q HEAD
-    cp = cherry-pick
-    ffs = flow feature start
-    fff = flow feature finish
-    sp = stash pop
-    ss = stash save
-    # with fzf: https://qiita.com/yukiarrr/items/9c21d97f6c8ac31de157#4-stash一覧をもっと見やすくしたい
-    sl = !git stash list | fzf --preview 'echo {} | grep -o stash@{.*} | xargs git stash show -p --color=always' --height 90% | grep -o stash@{.*}
-    sa = !git sl | xargs git stash apply
-    sd = !git sl | xargs git stash drop
-    b = branch
-    bn = !"git rev-parse --abbrev-ref HEAD|tr -d \\\\r\\\\n"
 [branch "master"]
     mergeoptions = --ff-only
 [core]
@@ -77,3 +20,6 @@
     default = simple
 [pull]
     rebase = false
+
+[include]
+    path = .gitaliases
