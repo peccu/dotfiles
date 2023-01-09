@@ -1,5 +1,4 @@
 # -*-mode:conf-toml-*- vim:ft=toml
-umask = 0o022
 
 # ~/.local/share/chezmoi/.chezmoi.toml.tmpl
 # =============================================================================
@@ -12,9 +11,13 @@ umask = 0o022
 #
 # {{- /* This file supports Go's text/template language. */}}
 
-# {{- $name := promptString "Git username for the author/committer" }}
-# {{- $email := promptString "Git email address for the author/committer" }}
+# umask
+umask = 0o022
+
+# Git user conf
+# {{- $name := promptStringOnce . "name" "Git username for the author/committer" }}
+# {{- $email := promptStringOnce . "email" "Git email address for the author/committer" }}
 
 [data]
-    email = "{{ $email }}"
-    name = "{{ $name }}"
+    email = {{ $email | quote }}
+    name = {{ $name | quote }}
