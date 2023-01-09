@@ -1,6 +1,6 @@
 # dotfiles
 
-my dot files with chezmoi
+my dot files with [chezmoi](https://www.chezmoi.io)
 
 ## Usage
 
