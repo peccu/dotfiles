@@ -24,8 +24,9 @@ progress = true
 {{- $codesandbox:= env "CODESANDBOX_HOST" | not | not -}}
 
 # Git user conf
-# {{- $name := promptStringOnce . "name" "Git username for the author/committer" }}
-# {{- $email := promptStringOnce . "email" "Git email address for the author/committer" }}
+{{- $name := promptStringOnce . "name" "Git username for the author/committer" "peccu" }}
+{{- $email := promptStringOnce . "email" "Git email address for the author/committer" "peccul@gmail.com" }}
+{{- writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
 
 [data]
     email = {{ $email | quote }}
