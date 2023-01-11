@@ -16,18 +16,34 @@ umask = 0o022
 # show progress
 progress = true
 
-{{- /* Environment detection */ -}}
-{{- /* ref. https://www.chezmoi.io/user-guide/machines/containers-and-vms/ */ -}}
-{{- $home:= eq .chezmoi.hostname "home" -}}
-{{- $tool:= eq (env "TOOLTYPE") "tool" -}}
-{{- $codespaces:= env "CODESPACES" | not | not -}}
-{{- $codesandbox:= env "CODESANDBOX_HOST" | not | not -}}
+{{- /* Environment detection */}}
+{{- /* ref. https://www.chezmoi.io/user-guide/machines/containers-and-vms/ */}}
+{{- $home:= eq .chezmoi.hostname "home" }}
+{{- $tool:= eq (env "TOOLTYPE") "tool" }}
+{{- $codespaces:= env "CODESPACES" | not | not }}
+{{- $codesandbox:= env "CODESANDBOX_HOST" | not | not }}
 
-# Git user conf
-{{- $name := promptStringOnce . "name" "Git username for the author/committer" "peccu" }}
-{{- $email := promptStringOnce . "email" "Git email address for the author/committer" "peccul@gmail.com" }}
-{{- writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
+{{- /* Checks if running interactively, which is not the case for GitHub Codespaces */}}
+{{- $interactive := stdinIsATTY }}
 
+{{- /* Default value for Git user conf */}}
+{{- $name := "peccu" }}
+{{- $email := "peccul@gmail.com" }}
+
+{{- if $interactive }}
+{{-   $name = promptStringOnce . "name" "Git username for the author/committer" $name }}
+{{-   $email = promptStringOnce . "email" "Git email address for the author/committer" $email }}
+{{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" }}
+{{- else }}
+{{-   if hasKey . "name" }}
+{{-     $name = .name }}
+{{-   end }}
+{{-   if hasKey . "email" }}
+{{-     $email = .email }}
+{{-   end }}
+{{- end }}
+
+# Data block (Needs this line to prevent concat data block and previous conf)
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
