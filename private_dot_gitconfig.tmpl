@@ -5,8 +5,13 @@
 [branch "master"]
     mergeoptions = --ff-only
 [core]
-    gitProxy = gitproxy-socat
+    # gitProxy = gitproxy-socat
     quotepath = off
+    # editor = emacs
+{{- if .tool }}
+    # delta https://github.com/dandavison/delta
+    pager = delta --plus-color="#216820" --minus-color="#340001" --theme='Monokai Extended'
+{{- end }}
 [color]
     diff = auto
     status = auto
@@ -17,10 +22,33 @@
 {{- else }}
     helper = store
 {{- end }}
-[push]
-    default = simple
+[http]
+    sslVerify = false
+[init]
+    defaultBranch = main
+{{- if .tool }}
+[interactive]
+    diffFilter = delta --color-only
+[diff "xlsx"]
+    textconv = git-xlsx-textconv
+# from delta README
+# [core]
+#     pager = delta
+# [interactive]
+#     diffFilter = delta --color-only
+# [delta]
+#     features = side-by-side line-numbers decorations
+#     whitespace-error-style = 22 reverse
+# [delta "decorations"]
+#     commit-decoration-style = bold yellow box ul
+#     file-style = bold yellow ul
+#     file-decoration-style = none
+{{- end }}
 [pull]
     rebase = false
+    ff = only
+[push]
+    default = simple
 
 [include]
     path = .gitalias
