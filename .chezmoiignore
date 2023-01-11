@@ -1,13 +1,13 @@
 README.md
 LICENSE
 initialize.sh
-{{ if ne .env "home" -}}
+{{ if not .home -}}
 # only for home machine
 .lemrc
 .screenrc
 .tmux.conf
-{{- else if ne .env "codesandbox" -}}
+{{- else if not .codesandbox -}}
 # only for codesandbox
-{{- else if ne .env "codespace" -}}
+{{- else if not .codespace -}}
 # only for codespace
 {{- end }}

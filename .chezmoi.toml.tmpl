@@ -17,23 +17,20 @@ umask = 0o022
 progress = true
 
 # Environment detection
-# {{- $env := "other" }}
-# {{ if eq .chezmoi.hostname "home" -}}
-# only for home machine
-# {{- $env = "home" }}
-# {{- else if eq .chezmoi.homeDir "/project/home/peccu" -}}
-# only for codesandbox
-# {{- $env = "codesandbox" }}
-# {{- else if eq .chezmoi.username "codespace" -}}
-# only for codespace
-# {{- $env = "codespace" }}
-# {{- end }}
+# ref. https://www.chezmoi.io/user-guide/machines/containers-and-vms/
+# {{- $home:= eq .chezmoi.hostname "home" -}}
+# {{- $tool:= eq (env "TOOLTYPE") "tool" -}}
+# {{- $codespaces:= env "CODESPACES" | not | not -}}
+# {{- $codesandbox:= env "CODESANDBOX_HOST" | not | not -}}
 
 # Git user conf
 # {{- $name := promptStringOnce . "name" "Git username for the author/committer" }}
 # {{- $email := promptStringOnce . "email" "Git email address for the author/committer" }}
 
 [data]
-    env = {{ $env | quote }}
     email = {{ $email | quote }}
     name = {{ $name | quote }}
+    home = {{ $home }}
+    tool = {{ $tool }}
+    codespaces = {{ $codespaces }}
+    codesandbox = {{ $codesandbox }}
