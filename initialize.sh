@@ -1,5 +1,5 @@
 #!/bin/bash
-# -*- shell-script -*-
+# -*- coding:utf-8; mode:shell-script  -*-
 # initialize dot files
 
 detectpath(){
