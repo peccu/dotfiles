@@ -9,6 +9,6 @@ initialize.sh
 .tmux.conf
 {{- else if not .codesandbox -}}
 # only for codesandbox
-{{- else if not .codespace -}}
+{{- else if not .codespaces -}}
 # only for codespace
 {{- end }}
