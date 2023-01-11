@@ -1,0 +1,7 @@
+#!/bin/bash
+# This file is for Codespaces's default script
+curl -fsLS bit.ly/dot-ini | bash
+# update completion
+hash -r
+# apply
+chezmoi apply -v

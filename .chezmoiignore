@@ -2,6 +2,7 @@ README.md
 LICENSE
 initialize.sh
 *~
+script
 {{ if not .home -}}
 # only for home machine
 .lemrc
