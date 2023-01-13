@@ -142,9 +142,3 @@ export PROMPT_DIRTRIM=4
 exists() {
     which $1 >/dev/null 2>&1
 }
-
-# chezmoi completion
-if exists chezmoi
-then
-  eval "$(chezmoi completion bash)"
-fi
