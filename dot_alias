@@ -12,7 +12,7 @@ alias gu="git fetch --tags --prune && git pull origin"
 alias tb="git symbolic-ref --short HEAD | tr -d \"\\n\""
 # git status(st) lfs
 alias stl='git lfs status'
-alias push-u-this-branch='git push -u HEAD'
+alias push-u-this-branch='git push -u origin HEAD'
 alias 1="awk '{print \$1}'"
 alias 2="awk '{print \$2}'"
 alias 3="awk '{print \$3}'"
