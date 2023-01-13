@@ -1,7 +1,8 @@
+*~
 README.md
 LICENSE
 initialize.sh
-*~
+# for codespaces setup script
 script
 {{ if not .home -}}
 # only for home machine
