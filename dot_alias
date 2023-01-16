@@ -34,3 +34,4 @@ alias e='emacs -q -nw'
 alias gitco='git checkout --'
 alias jl=jless
 alias tf=terraform
+alias git-add-safe-directory='git config --global --add safe.directory $(pwd)'
