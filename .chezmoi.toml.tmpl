@@ -16,13 +16,6 @@ umask = 0o022
 # show progress
 progress = true
 
-{{- /* Environment detection */}}
-{{- /* ref. https://www.chezmoi.io/user-guide/machines/containers-and-vms/ */}}
-{{- $home:= eq .chezmoi.hostname "home" }}
-{{- $tool:= eq (env "TOOLTYPE") "tool" }}
-{{- $codespaces:= env "CODESPACES" | not | not }}
-{{- $codesandbox:= env "CODESANDBOX_HOST" | not | not }}
-
 {{- /* Checks if running interactively, which is not the case for GitHub Codespaces */}}
 {{- $interactive := stdinIsATTY }}
 
@@ -47,10 +40,16 @@ progress = true
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
-    home = {{ $home }}
+    # Environment detection
+    # ref. https://www.chezmoi.io/user-guide/machines/containers-and-vms/
+    home = {{ eq .chezmoi.hostname "home" }}
+    {{- $tool := eq (env "TOOLTYPE") "tool" }}
     tool = {{ $tool }}
-    codespaces = {{ $codespaces }}
+    codespaces = {{ env "CODESPACES" | not | not }}
+    {{- $codesandbox := env "CODESANDBOX_HOST" | not | not }}
     codesandbox = {{ $codesandbox }}
     # Features Flags
     withZsh = {{ $codesandbox }}
     withTmux = {{ $tool }}
+    withAhk = {{ env "WITH_AHK" | not | not }}
+    withWsl = {{ env "WITH_WSL" | not | not }}
