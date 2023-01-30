@@ -10,9 +10,9 @@ script
 # only for home machine
 .lemrc
 .screenrc
-.tmux.conf
 {{- else if not .codesandbox -}}
 # only for codesandbox
 {{- else if not .codespaces -}}
 # only for codespace
+{{- else -}}
 {{- end }}
