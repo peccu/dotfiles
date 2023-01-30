@@ -4,8 +4,10 @@
 README.md
 LICENSE
 initialize.sh
+.bash-preexec.sh
 # for codespaces setup script
 script
+{{/* env/machine related */}}
 {{ if not .home -}}
 # only for home machine
 .lemrc
@@ -15,4 +17,13 @@ script
 {{- else if not .codespaces -}}
 # only for codespace
 {{- else -}}
+{{- end }}
+{{/* feature related */}}
+{{- if not .withAhk }}
+.ahk
+.ahk/*
+{{- end }}
+{{- if not .withWsl }}
+.wsl
+.wsl/*
 {{- end }}
