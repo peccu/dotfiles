@@ -6,7 +6,7 @@ alias stt='git status -uno'
 alias git-submodule-rm="git rm-submodule --no-commit"
 alias gitu="git unstage"
 alias gl="git clone"
-# リモートからフェッチ(タグを更新し、削除済みブランチを削除)してpullする
+# fetch with tags and prune deleted branch and pull from origin
 alias gu="git fetch --tags --prune && git pull origin"
 # this branch
 alias tb="git symbolic-ref --short HEAD | tr -d \"\\n\""
