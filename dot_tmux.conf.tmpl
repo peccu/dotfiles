@@ -30,6 +30,10 @@ bind C-7 select-window -t :=7
 bind C-8 select-window -t :=8
 bind C-9 select-window -t :=9
 
+# resize window
+# does this work?
+bind C-l resize-window -A
+
 # # window selection
 # bind ! select-window -t :1
 
@@ -148,13 +152,24 @@ bind Enter run-shell "sh -c \"yes rotate-window -U \\; | head -n $(tmux display-
 # # prefix Insert で main-vertical レイアウトのまま、新たなペインを生成
 # bind IC run-shell "sh -c \"tmux split-window -v -t 0 \\\"$( tmux list-panes -F '#{pane_active} #{pane_start_command}' | egrep ^1 | sed 's/^1 //' )\\\" \\; select-layout main-vertical \""
 
+{{- if .my.withMintty }}
+# for windows mintty
+# https://unix.stackexchange.com/a/407776
+# For vi copy mode bindings
+bind -Tcopy-mode-vi MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X cancel
+# For emacs copy mode bindings
+# bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X clear-selection
+bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X cancel
+{{- end }}
+
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # reload this file with tmux source ~/.tmux.conf
 # install with C-t I
+# or call ~/.tmux/plugins/tpm/bindings/install_plugins directly
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
 
-run '~/.tmux/plugins/tpm/tpm'
+run -b '~/.tmux/plugins/tpm/tpm'
