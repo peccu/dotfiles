@@ -1,6 +1,6 @@
 # -*- coding:utf-8; mode:shell-script  -*-
+{{- if .my.withWsl }}
 # for dockerd in wsl, start dockerd standalone without systemd
-{{- if .withWsl }}
 if exists dockerd
 then
     # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9

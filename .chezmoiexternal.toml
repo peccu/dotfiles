@@ -1,4 +1,4 @@
-{{- if and false .withZsh -}}
+{{- if and false .my.withZsh -}}
 [".oh-my-zsh"]
     type = "archive"
     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
@@ -17,7 +17,7 @@
     exact = true
     stripComponents = 1
 {{- end }}
-{{- if .withTmux -}}
+{{- if .my.withTmux -}}
 [".tmux/plugins/tpm"]
     type = "git-repo"
     url = "https://github.com/tmux-plugins/tpm.git"

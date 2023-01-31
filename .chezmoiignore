@@ -8,22 +8,22 @@ initialize.sh
 # for codespaces setup script
 script
 {{/* env/machine related */}}
-{{ if not .home -}}
+{{ if not .my.home -}}
 # only for home machine
 .lemrc
 .screenrc
-{{- else if not .codesandbox -}}
+{{- else if not .my.codesandbox -}}
 # only for codesandbox
-{{- else if not .codespaces -}}
+{{- else if not .my.codespaces -}}
 # only for codespace
 {{- else -}}
 {{- end }}
 {{/* feature related */}}
-{{- if not .withAhk }}
+{{- if not .my.withAhk }}
 .ahk
 .ahk/*
 {{- end }}
-{{- if not .withWsl }}
+{{- if not .my.withWsl }}
 .wsl
 .wsl/*
 {{- end }}

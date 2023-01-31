@@ -24,20 +24,20 @@ progress = true
 {{- $email := "peccul@gmail.com" }}
 
 {{- if $interactive }}
-{{-   $name = promptStringOnce . "name" "Git username for the author/committer" $name }}
-{{-   $email = promptStringOnce . "email" "Git email address for the author/committer" $email }}
+{{-   $name = promptStringOnce . "my.name" "Git username for the author/committer" $name }}
+{{-   $email = promptStringOnce . "my.email" "Git email address for the author/committer" $email }}
 {{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" }}
 {{- else }}
-{{-   if hasKey . "name" }}
+{{-   if hasKey . "my.name" }}
 {{-     $name = .name }}
 {{-   end }}
-{{-   if hasKey . "email" }}
+{{-   if hasKey . "my.email" }}
 {{-     $email = .email }}
 {{-   end }}
 {{- end }}
 
 # Data block (Needs this line to prevent concat data block and previous conf)
-[data]
+[data.my]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
     # Environment detection
@@ -49,7 +49,7 @@ progress = true
     {{- $codesandbox := env "CODESANDBOX_HOST" | not | not }}
     codesandbox = {{ $codesandbox }}
     # Features Flags
-    withZsh = {{ $codesandbox }}
-    withTmux = {{ $tool }}
-    withAhk = {{ env "WITH_AHK" | not | not }}
-    withWsl = {{ env "WITH_WSL" | not | not }}
+    withZsh = {{ promptBoolOnce . "my.withZsh" "Use zsh conf with oh-my-zsh" }}
+    withTmux = {{ promptBoolOnce . "my.withTmux" "Use tmux conf with tpm" }}
+    withAhk = {{ promptBoolOnce . "my.withAhk" "Use AutoHotKey conf" }}
+    withWsl = {{ promptBoolOnce . "my.withWsl" "Use Wsl conf for shrink scripts etc." }}
