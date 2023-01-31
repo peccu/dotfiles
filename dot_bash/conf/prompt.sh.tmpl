@@ -41,6 +41,9 @@ case "$TERM" in
         ;;
 esac
 
+{{- if .my.tool }}
+PS1='\u@'${TOOLTYPE}':\w\$ '
+{{- end }}
 {{- if .my.codespaces }}
 # Codespaces bash prompt theme
 __bash_prompt() {
@@ -64,5 +67,7 @@ __bash_prompt() {
     unset -f __bash_prompt
 }
 __bash_prompt
-export PROMPT_DIRTRIM=4
 {{- end }}
+
+# trim path directories
+export PROMPT_DIRTRIM=2
