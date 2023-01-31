@@ -27,3 +27,7 @@ script
 .wsl
 .wsl/*
 {{- end }}
+{{- if not .my.withWinterm }}
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json
+AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json
+{{- end }}

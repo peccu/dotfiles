@@ -48,8 +48,10 @@ progress = true
     codespaces = {{ env "CODESPACES" | not | not }}
     {{- $codesandbox := env "CODESANDBOX_HOST" | not | not }}
     codesandbox = {{ $codesandbox }}
+    wsl = {{ env "WSLENV" | not | not }}
     # Features Flags
     withZsh = {{ promptBoolOnce . "my.withZsh" "Use zsh conf with oh-my-zsh" }}
     withTmux = {{ promptBoolOnce . "my.withTmux" "Use tmux conf with tpm" }}
     withAhk = {{ promptBoolOnce . "my.withAhk" "Use AutoHotKey conf" }}
     withWsl = {{ promptBoolOnce . "my.withWsl" "Use Wsl conf for shrink scripts etc." }}
+    withWinterm = {{ promptBoolOnce . "my.withWinterm" "Use WindowsTerminal settings" }}
