@@ -49,6 +49,14 @@ bind -n S-right select-pane -R
 # show copy mode key binds
 bind / list-keys -T emacs-copy
 
+# work Home/End correctly in xterm
+# cf. https://stackoverflow.com/a/55616731
+bind-key -n Home send Escape "OH"
+bind-key -n End send Escape "OF"
+# check in `cat -v`
+# doesnt work ? 
+# set-window-option -g xterm-keys on
+
 # enable mouse-* (scroll, select-pane, select-window, resize-pane)
 # https://superuser.com/a/1084503
 # https://ryanfb.github.io/etc/2015/10/19/tmux_mouse_mode_on_el_capitan.html
