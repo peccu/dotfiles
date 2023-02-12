@@ -1,0 +1,7 @@
+# -*- coding:utf-8; mode:shell-script  -*-
+{{- if .my.withOci }}
+export PATH=/root/bin:$PATH
+
+[[ -e "/root/lib/oracle-cli/lib/python3.7/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] \
+    && source "/root/lib/oracle-cli/lib/python3.7/site-packages/oci_cli/bin/oci_autocomplete.sh"
+{{- end }}
