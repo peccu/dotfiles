@@ -58,4 +58,5 @@ alias d=docker
 alias dbuild='d build . -t'
 alias drun='d run --rm -it --name'
 alias drunit='d run --rm -it --name'
+alias drunbash='d run --rm -it --entrypoint bash --name'
 alias drund='d run --rm -d --name'
