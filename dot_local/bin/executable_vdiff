@@ -1,0 +1,16 @@
+#!/bin/bash
+# -*- shell-script -*-
+tmpdir=$(mktemp -d /tmp/emacs-vdiff.XXXXX)
+emacs -Q --eval "(progn
+  (setq user-emacs-directory \"${tmpdir}/\")
+  (package-refresh-contents)
+  (package-install 'vdiff)
+  (require 'vdiff)
+  (define-key vdiff-3way-mode-map (kbd \"C-c\") vdiff-mode-prefix-map)
+  (vdiff-files3 \"$1\" \"$2\" \"$3\"))"
+rm -rf $tmpdir
+
+# C-c n/p move cursor to hunk
+# C-c s sends current hunk to other files
+# C-c r receives from other files to current hunk
+# C-c w write changes to files

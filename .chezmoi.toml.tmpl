@@ -16,6 +16,10 @@ umask = 0o022
 # show progress
 progress = true
 
+[merge]
+    # in usr/local/bin/vdiff with emacs vdiff
+    command = "vdiff"
+
 {{- /* Checks if running interactively, which is not the case for GitHub Codespaces */}}
 {{- $interactive := stdinIsATTY }}
 
