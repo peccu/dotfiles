@@ -1,6 +1,7 @@
 #!/bin/bash
 # -*- coding:utf-8; mode:shell-script  -*-
 # initialize dot files
+# USAGE: curl -fsLS bit.ly/dot-ini | bash
 
 detectpath(){
     local binpath=.
