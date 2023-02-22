@@ -50,7 +50,13 @@ function ewsl(){
         echo init directory does not specified so using ~/.emacs.d
         basedir=~/.emacs.d
     fi
-    emacs -q --eval '(setq user-emacs-directory "'$basedir'/")' -l $basedir/init.el
+    if [ $(emacs --version | grep 'GNU Emacs [1-9]' | awk '{print $3}' | cut -d. -f1) -ge 29 ]
+    then
+	# Emacs 29 or up can use --init-directory
+	emacs --init-directory $basedir
+    else
+	HOME=$basedir/.. emacs -Q --eval '(setq user-emacs-directory "'$basedir'/")' -l $basedir/init.el
+    fi
 }
 
 function t(){
