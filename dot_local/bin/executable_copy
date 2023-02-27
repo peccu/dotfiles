@@ -1,0 +1,3 @@
+#!/bin/bash
+source ~/.bash/conf/0_function.sh
+cat - | C
