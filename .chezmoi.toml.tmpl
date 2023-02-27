@@ -26,10 +26,14 @@ progress = true
 {{- /* Default value for Git user conf */}}
 {{- $name := "peccu" }}
 {{- $email := "peccul@gmail.com" }}
+{{- $theWayGHToken := "" }}
+{{- $theWayGistId := "" }}
 
 {{- if $interactive }}
 {{-   $name = promptStringOnce . "my.name" "Git username for the author/committer" $name }}
 {{-   $email = promptStringOnce . "my.email" "Git email address for the author/committer" $email }}
+{{-   $theWayGHToken = promptStringOnce . "my.theWayGHToken" "GitHub Token to access gist for The-Way" }}
+{{-   $theWayGistId = promptStringOnce . "my.theWayGistId" "gist ID for The-Way" }}
 {{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" }}
 {{- else }}
 {{-   if hasKey . "my.name" }}
@@ -44,6 +48,8 @@ progress = true
 [data.my]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
+    theWayGHToken = {{ $theWayGHToken | quote }}
+    theWayGistId = {{ $theWayGistId | quote }}
     # Environment detection
     # ref. https://www.chezmoi.io/user-guide/machines/containers-and-vms/
     home = {{ eq .chezmoi.hostname "home" }}
