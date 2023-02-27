@@ -177,6 +177,8 @@ bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; s
 # install with C-t I
 # or call ~/.tmux/plugins/tpm/bindings/install_plugins directly
 set -g @plugin 'tmux-plugins/tpm'
+# default directory is ~/.local/share/tmux/resurrect but if ~/.tmux/resurrect is exists, it will override.
+# in chezmoi, ~/.tmux/resurrect should be created
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
