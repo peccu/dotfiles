@@ -113,7 +113,8 @@ set -g status-bg cyan
 
 # see nerd font cheat sheet like `seq`
 # https://www.nerdfonts.com/cheat-sheet
-set -g status-right '#{prefix_highlight}#{net_speed} %m/%d %H:%M'
+# set -g status-right '#{prefix_highlight}#{net_speed} %m/%d %H:%M'
+set -g status-right '#{prefix_highlight} %m/%d %H:%M'
 
 
 # Character pair  Replaced with
@@ -203,8 +204,8 @@ TMUX_FZF_MENU=\
 "bar\nls ~\n"
 ## show tmux prefix key
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
-## show net speed
-set -g @plugin 'tmux-plugins/tmux-net-speed'
-set -g @net_speed_format "D:%3s U:%3s"
+# ## show net speed
+# set -g @plugin 'tmux-plugins/tmux-net-speed'
+# set -g @net_speed_format "D:%3s U:%3s"
 
 run -b '~/.tmux/plugins/tpm/tpm'
