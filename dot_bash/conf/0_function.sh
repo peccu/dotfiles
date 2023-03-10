@@ -34,12 +34,45 @@ function n(){
 }
 
 function C(){
-    if exists clip.exe
-    then
-        cat - | clip.exe
-    else
-        cat - > /clip
-    fi
+    # for linux 'xclip -in -selection clipboard'
+    # alternative 'xsel -ib'
+    # osx 'pbcopy'
+    # Android 'termux-clipboard-set'
+    # tmux buffer 'tmux loadb -'
+    # WSL with script '#!/bin/sh echo "$(cat -)" | clip.exe'
+    # why doesn't use directly clip.exe ...??
+    # copy over container in ~/.local/bin/copy
+    cat - \
+        | tee >(
+            # if in tmux, copy into tmux buffer too
+            if [ -n "$TMUX" ]
+            then
+                cat - | tmux loadb -
+            else
+                cat - >/dev/null
+            fi
+        ) \
+            | (
+        # and copy to clipboard
+        if exists clip.exe
+        then
+            cat - | clip.exe
+        elif exists xclip
+        then
+            # does not tested.
+            cat - | xclip -i
+        elif exists xsel
+        then
+            # does not tested. xsel -o is output?
+            cat - | xsel -i
+        elif exists pbcopy
+        then
+            cat - | pbcopy
+        else
+            # fallback for container
+            cat - > /clip
+        fi
+    )
 }
 
 function ewsl(){

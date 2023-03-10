@@ -1,17 +1,6 @@
 theme = 'base16-ocean.dark'
 db_dir = '{{ .chezmoi.homeDir }}/.local/share/the-way/the_way_db'
 themes_dir = '{{ .chezmoi.homeDir }}/.local/share/the-way/themes'
-# for linux
-# copy_cmd = 'xclip -in -selection clipboard'
-# osx
-# copy_cmd = 'pbcopy'
-# Android
-# copy_cmd = 'termux-clipboard-set'
-# tmux ??
-# copy_cmd = 'xsel -ib'
-# WSL with script '#!/bin/sh echo "$(cat -)" | clip.exe'
-# why doesn't use directly clip.exe ...??
-# copy over container in ~/.local/bin/copy
 copy_cmd = 'copy'
 github_access_token = '{{ .my.theWayGHToken }}'
 gist_id = '{{ .my.theWayGistId }}'
