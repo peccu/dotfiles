@@ -1,5 +1,5 @@
 # reload this file
-bind R source-file ~/.tmux.conf \; display-message "Reload Config!!"
+bind r source-file ~/.tmux.conf \; display-message "Reload Config!!"
 # Prefix
 set-option -g prefix C-t
 unbind-key C-b
@@ -47,7 +47,8 @@ bind -n S-right select-pane -R
 # bind C-; select-pane -t :.+
 
 # show copy mode key binds
-bind / list-keys -T emacs-copy
+# bind / list-keys -T emacs-copy
+bind / list-keys -T copy-mode
 
 # work Home/End correctly in xterm
 # cf. https://stackoverflow.com/a/55616731
@@ -181,6 +182,10 @@ bind -Tcopy-mode-vi MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \
 # bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X clear-selection
 bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X cancel
 {{- end }}
+
+# popup snippet copy
+# needs fzf and bat
+bind -n M-g popup -E "(cd ~/Codes/the-way; cat index.csv | fzf --delimiter , --with-nth 2.. --preview 'bat -n --color=always {1}' --preview-window up,60% --info inline --bind 'enter:become(cat {1} | copy)')"
 
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
