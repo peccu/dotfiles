@@ -25,3 +25,9 @@
     [".tmux/plugins/tpm".pull]
         args = ["--ff-only"]
 {{- end }}
+[".local/share/snip"]
+    type = "git-repo"
+    url = "https://peccu:{{ .my.theWayGHToken }}@gist.github.com/{{ .my.theWayGistId }}.git"
+    refreshPeriod = "168h"
+    [".local/share/snip".pull]
+        args = ["--ff-only"]
