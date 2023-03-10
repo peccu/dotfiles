@@ -185,7 +185,8 @@ bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; s
 
 # popup snippet copy
 # needs fzf and bat
-bind -n M-g popup -E "(cd ~/Codes/the-way; cat index.csv | fzf --delimiter , --with-nth 2.. --preview 'bat -n --color=always {1}' --preview-window up,60% --info inline --bind 'enter:become(cat {1} | copy)')"
+# defined in ~/.local/bin/snip and ~/.bash/conf/snippet-manager.sh
+bind -n M-g popup -E "snip"
 
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
