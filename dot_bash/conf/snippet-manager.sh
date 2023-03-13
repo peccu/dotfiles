@@ -25,7 +25,10 @@ function snip(){
 
 function snip-add(){
     (
-        EDITOR='emacs -Q -nw'
+        if [ -z "$EDITOR" ]
+        then
+            EDITOR='vi'
+        fi
         snip-checkdirty || return 1
         read -p "Description: " desc
         read -p "Extension: " ext
