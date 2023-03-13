@@ -2,6 +2,7 @@
 
 export SNIP_DIR=~/.local/share/snip
 
+# snippet file format
 # first line is description
 # the lasting lines are the snippet
 
@@ -19,7 +20,7 @@ function snip(){
                   --preview 'tail -n +2 {1} | bat -n --color=always --file-name {1}' \
                   --preview-window up,60% \
                   --info inline \
-                  --bind 'enter:become(cat {1} | copy)'
+                  --bind 'enter:become(tail -n +2 {1} | copy)'
     )
 }
 
