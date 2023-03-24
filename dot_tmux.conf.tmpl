@@ -115,7 +115,7 @@ set -g status-bg cyan
 # see nerd font cheat sheet like `seq`
 # https://www.nerdfonts.com/cheat-sheet
 # set -g status-right '#{prefix_highlight}#{net_speed} %m/%d %H:%M'
-set -g status-right '#{prefix_highlight} %m/%d %H:%M'
+set -g status-right '#{prefix_highlight} Continuum:#{continuum_status} %m/%d %H:%M'
 
 
 # Character pair  Replaced with
@@ -197,10 +197,11 @@ set -g @plugin 'tmux-plugins/tpm'
 ## save restore sessions
 # default directory is ~/.local/share/tmux/resurrect but if ~/.tmux/resurrect is exists, it will override.
 # in chezmoi, ~/.tmux/resurrect should be created
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '5'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 ## auto save (each 15min.) and reload
 set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @continuum-restore 'on'
 ## manage tmux with fzf
 set -g @plugin 'sainnhe/tmux-fzf'
 TMUX_FZF_LAUNCH_KEY="C-f"
