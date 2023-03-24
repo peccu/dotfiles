@@ -30,7 +30,7 @@ function snip-add(){
         then
             EDITOR='vi'
         fi
-        snip-checkdirty || return 1
+        _snip-checkdirty || return 1
         read -p "Description: " desc
         read -p "Extension: " ext
         read -p "Snippet (leave empty to open EDITOR): " code
@@ -41,7 +41,7 @@ function snip-add(){
         else
             printf "$code\n" > $tmpfile
         fi
-        snip-sync
+        _snip-sync
         cd $SNIP_DIR
         nextnumber=$((1+ $(ls snip* | cut -d. -f1 | cut -d_ -f2 | sort -n | tail -1)))
         cat <(echo "$desc") $tmpfile > snip_$nextnumber.$ext
@@ -53,7 +53,7 @@ function snip-add(){
 }
 alias sa=snip-add
 
-function snip-checkdirty(){
+function _snip-checkdirty(){
     (
         cd $SNIP_DIR
         git status -s | grep snip \
@@ -66,7 +66,7 @@ function snip-checkdirty(){
     )
 }
 
-function snip-sync(){
+function _snip-sync(){
     (
         cd $SNIP_DIR
         git fetch origin
