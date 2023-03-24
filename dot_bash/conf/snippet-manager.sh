@@ -31,9 +31,9 @@ function snip-add(){
             EDITOR='vi'
         fi
         _snip-checkdirty || return 1
-        read -p "Description: " desc
-        read -p "Extension: " ext
-        read -p "Snippet (leave empty to open EDITOR): " code
+        read -ep "Description: " desc
+        read -ep "Extension: " ext
+        read -ep "Snippet (leave empty to open EDITOR): " code
         tmpfile=$(mktemp -t snip.XXXXXX --suffix=.$ext)
         if [ -z "$code" ]
         then
