@@ -1,8 +1,6 @@
 # -*- shell-script -*-
-# https://github.com/mooz/percol#zsh-history-search
-# TODO needs support buildin command, function and alias (maybe need calls type)
 function exists(){
-    which $1 &> /dev/null 2>&1
+    type $1 >/dev/null 2>&1
 }
 
 # diff xlsx
