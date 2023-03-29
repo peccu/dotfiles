@@ -41,6 +41,7 @@ function snip-add(){
         else
             printf "$code\n" > $tmpfile
         fi
+        echo "snip syncing"
         _snip-sync
         cd $SNIP_DIR
         nextnumber=$((1+ $(ls snip* | cut -d. -f1 | cut -d_ -f2 | sort -n | tail -1)))
