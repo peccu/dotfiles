@@ -101,3 +101,15 @@ function ja(){
 function nein(){
     echo nein
 }
+
+function tarpvcompress(){
+    local dir=$1
+    # https://www.tecmint.com/monitor-copy-backup-tar-progress-in-linux-using-pv-command/
+    tar czf - $dir | (pv > $dir.tar.gz)
+}
+
+function tarpvextract(){
+    local tar=$1
+    # https://stackoverflow.com/a/67999872
+    pv $tar | tar xz
+}
