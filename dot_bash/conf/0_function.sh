@@ -27,6 +27,20 @@ function jqcsv(){
         | @csv'
 }
 
+function jqflatten(){
+    # https://stackoverflow.com/a/33290267
+    cat - \
+        | jq -r '.[]
+| [
+    leaf_paths as $path
+    | {
+        "key": $path | map(tostring) | join("_"),
+        "value": getpath($path)
+    }
+  ]
+| from_entries'
+}
+
 function n(){
     line_notify "$@"
 }
