@@ -45,7 +45,7 @@ alias psd='ps aux | grep'
 
 # docker related
 alias d=docker
-alias doco=docker-compose
+alias doco='docker compose'
 alias dbuild='d build . -t'
 alias drun='d run --rm -it --name'
 alias drunit='d run --rm -it --name'
