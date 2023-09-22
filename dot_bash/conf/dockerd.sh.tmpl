@@ -15,7 +15,7 @@ then
         chgrp docker "$DOCKER_DIR"
         # ulimit conf is for elasticsearch
         # https://docs.docker.com/engine/reference/commandline/dockerd/
-        $WSL -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd -H $DOCKER_HOST --default-ulimit nofile=66000:66000 --default-ulimit nproc=66000:66000 < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
+        $WSL -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd --default-ulimit nofile=66000:66000 --default-ulimit nproc=66000:66000 < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
     fi
 fi
 {{- end }}
