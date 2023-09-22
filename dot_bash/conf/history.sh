@@ -7,8 +7,8 @@ export HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-export HISTSIZE=
-export HISTFILESIZE=
+export HISTSIZE=100000
+export HISTFILESIZE=1000000
 # date format
 export HISTTIMEFORMAT="%F %T "
 # export HISTTIMEFORMAT="%y/%m/%d-%T "
