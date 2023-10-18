@@ -1,6 +1,6 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
-    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "$schema": "https://aka.ms/terminal-profiles-schema-preview",
     "actions": 
     [
         {
@@ -14,12 +14,25 @@
         {
             "command": 
             {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+d"
+        },
+        {
+            "command": 
+            {
                 "action": "globalSummon",
                 "desktop": "any",
                 "monitor": "any",
                 "name": "_quake"
             },
-            "keys": "win+`"
+            "keys": "alt+vk(25)"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": 
@@ -30,21 +43,8 @@
             "keys": "ctrl+left"
         },
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
-        },
-        {
             "command": "paste",
             "keys": "ctrl+v"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
-            },
-            "keys": "alt+shift+d"
         },
         {
             "command": "unbound",
@@ -55,12 +55,32 @@
             "keys": "ctrl+vk(243)"
         },
         {
+            "command": "unbound",
+            "keys": "win+`"
+        },
+        {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "down"
+                "action": "splitPane",
+                "split": "down"
             },
-            "keys": "shift+down"
+            "keys": "alt+shift+minus"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "keys": "ctrl+minus"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "keys": "ctrl+shift+2"
         },
         {
             "command": 
@@ -85,6 +105,14 @@
                 "split": "right"
             },
             "keys": "ctrl+shift+\\"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "down"
+            },
+            "keys": "shift+down"
         },
         {
             "command": 
@@ -155,30 +183,6 @@
                 "direction": "up"
             },
             "keys": "ctrl+up"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "down"
-            },
-            "keys": "alt+shift+minus"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "down"
-            },
-            "keys": "ctrl+minus"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "down"
-            },
-            "keys": "ctrl+shift+2"
         }
     ],
     "alwaysShowTabs": false,
