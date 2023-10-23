@@ -127,3 +127,27 @@ function tarpvextract(){
     # https://stackoverflow.com/a/67999872
     pv $tar | tar xz
 }
+
+function set-permissions-file-to-644(){
+    find . -type f -print | xargs chmod 644
+}
+
+function set-permissions-file-to-755(){
+    find . -type f -print | xargs chmod 755
+}
+
+function set-permissions-directory-to-755(){
+    find . -type d -print | xargs chmod 755
+}
+
+function setup-permissions-for-ssh-dir(){
+    # set correct permissions
+    # cf. https://superuser.com/a/215506
+    # for directories and files
+    # cf. https://superuser.com/a/91938
+    find ~/.ssh -type d -print | xargs chmod 755
+    find ~/.ssh -type f -print | grep -e '\.pub$' | xargs chmod 644
+    find ~/.ssh -type f -print | grep -ve '\.pub$' | xargs chmod 600
+    chmod 700 ~/.ssh
+    chmod 755 ~
+}
