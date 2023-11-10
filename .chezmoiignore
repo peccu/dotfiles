@@ -39,5 +39,6 @@ AppData
 # AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState
 # AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json
 {{- end }}
-# non preview has uninstalled
-AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe
+# # non preview has uninstalled
+# back to non preview
+# AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe
