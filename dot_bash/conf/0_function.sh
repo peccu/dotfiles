@@ -151,3 +151,12 @@ function setup-permissions-for-ssh-dir(){
     chmod 700 ~/.ssh
     chmod 755 ~
 }
+
+function is_in_wslhost(){
+    # defined in 0_env_local.sh
+    exists hostname && [ "${WSLHOST_HOSTNAME}" = "$(hostname)" ]
+}
+
+function not_in_tmux(){
+    [ -z "$TMUX" ]
+}
