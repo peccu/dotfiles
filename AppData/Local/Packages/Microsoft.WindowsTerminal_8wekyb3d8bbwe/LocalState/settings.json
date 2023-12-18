@@ -16,8 +16,7 @@
             {
                 "action": "resizePane",
                 "direction": "left"
-            },
-            "keys": "ctrl+left"
+            }
         },
         {
             "command": "find",
@@ -61,8 +60,7 @@
             {
                 "action": "moveFocus",
                 "direction": "down"
-            },
-            "keys": "shift+down"
+            }
         },
         {
             "command": 
@@ -117,6 +115,54 @@
             "keys": "ctrl+1"
         },
         {
+            "command": "unbound",
+            "keys": "alt+down"
+        },
+        {
+            "command": "unbound",
+            "keys": "shift+down"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+left"
+        },
+        {
+            "command": "unbound",
+            "keys": "shift+left"
+        },
+        {
+            "command": "unbound",
+            "keys": "shift+right"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+right"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+up"
+        },
+        {
+            "command": "unbound",
+            "keys": "shift+up"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+down"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+left"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+right"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+up"
+        },
+        {
             "command": 
             {
                 "action": "copy",
@@ -129,24 +175,21 @@
             {
                 "action": "moveFocus",
                 "direction": "left"
-            },
-            "keys": "shift+left"
+            }
         },
         {
             "command": 
             {
                 "action": "moveFocus",
                 "direction": "right"
-            },
-            "keys": "shift+right"
+            }
         },
         {
             "command": 
             {
                 "action": "moveFocus",
                 "direction": "up"
-            },
-            "keys": "shift+up"
+            }
         },
         {
             "command": 
@@ -167,29 +210,26 @@
             {
                 "action": "resizePane",
                 "direction": "down"
-            },
-            "keys": "ctrl+down"
+            }
         },
         {
             "command": 
             {
                 "action": "resizePane",
                 "direction": "right"
-            },
-            "keys": "ctrl+right"
+            }
         },
         {
             "command": 
             {
                 "action": "resizePane",
                 "direction": "up"
-            },
-            "keys": "ctrl+up"
+            }
         }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{d7b20cea-47a9-518c-95a4-c8bd91e2e1c6}",
+    "defaultProfile": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
     "disableAnimations": true,
     "newTabMenu": 
     [
@@ -229,17 +269,16 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "colorScheme": "Campbell",
-                "guid": "{d7b20cea-47a9-518c-95a4-c8bd91e2e1c6}",
-                "hidden": false,
-                "name": "Ubuntu 22.04.2 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
-            },
-            {
                 "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
-                "hidden": true,
+                "hidden": false,
                 "name": "Ubuntu-22.04",
                 "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{e5a83caa-4c73-52b3-ae6b-bc438d721ef9}",
+                "hidden": false,
+                "name": "Ubuntu 22.04.3 LTS",
+                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
             }
         ]
     },
