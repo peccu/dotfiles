@@ -30,6 +30,15 @@ script
 {{- if not .my.withWinterm }}
 AppData
 # if other feature used these folder, should split these ignore definition
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/AC/
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/AppData/
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/state.json
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/RoamingState/
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/Settings/
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/SystemAppData/
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/TempState/
 # AppData/Local
 # AppData/Local/Packages
 # AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe
