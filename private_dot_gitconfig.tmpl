@@ -10,7 +10,9 @@
     # editor = emacs
 {{- if .my.tool }}
     # delta https://github.com/dandavison/delta
-    pager = delta --plus-color="#216820" --minus-color="#340001" --theme='Monokai Extended'
+    # pager = delta --plus-color="#216820" --minus-color="#340001" --theme='Monokai Extended'
+    # from 0.7.1 to 0.16.5 change
+    pager = delta
 {{- end }}
 [color]
     diff = auto
@@ -36,6 +38,12 @@
 #     pager = delta
 # [interactive]
 #     diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    line-numbers = true
+    # plus-style = "#216820"
+    # minus-style = "#340001"
+    syntax-theme = "Monokai Extended"
 # [delta]
 #     features = side-by-side line-numbers decorations
 #     whitespace-error-style = 22 reverse
