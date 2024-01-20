@@ -23,7 +23,7 @@ then
   sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $(detectpath)
   hash -r
 fi
-chezmoi init peccu
+$(detectpath)/chezmoi init peccu
 echo check chezmoi diff and apply
 
 ### Use chezmoi
