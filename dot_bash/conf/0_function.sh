@@ -162,12 +162,25 @@ function not_in_tmux(){
 }
 
 function filter-branch-overwrite-git-author(){
-    # cf. https://stackoverflow.com/questions/750172/how-do-i-change-the-author-and-committer-name-email-for-multiple-commits/750182#750182
+    if [ $# -lt 3 ]
+    then
+        echo USAGE: filter-branch-overwrite-git-author "oldemail" "new name" "newemail"
+        return 1
+    fi
+    oldemail="$1"
+    shift
+    newname="$1"
+    shift
+    newemail="$1"
+    echo OLD_EMAIL="'$oldemail'"
+    echo CORRECT_NAME="'$newname'"
+    echo CORRECT_EMAIL="'$newemail'"
 
-git filter-branch --env-filter '
-OLD_EMAIL="your-old-email@example.com"
-CORRECT_NAME="Your Correct Name"
-CORRECT_EMAIL="your-correct-email@example.com"
+    # cf. https://stackoverflow.com/questions/750172/how-do-i-change-the-author-and-committer-name-email-for-multiple-commits/750182#750182
+    git filter-branch --env-filter '
+OLD_EMAIL="'$oldemail'"
+CORRECT_NAME="'$newname'"
+CORRECT_EMAIL="'$newemail'"
 if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
 then
     export GIT_COMMITTER_NAME="$CORRECT_NAME"
