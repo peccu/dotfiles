@@ -2,7 +2,8 @@
 {{- if .my.withWsl }}
 # for dockerd in wsl, start dockerd standalone without systemd
 # my new environment(Win11+Ubuntu-22.04) runs dockerd as service so check befor running dockerd
-if exists dockerd && ! ps aux | grep [d]ockerd > /dev/null
+# and, no need to run this in docker in docker (TOOLTYPE=tool)
+if exists dockerd && ! ps aux | grep [d]ockerd > /dev/null && [ -z "$TOOLTYPE" ]
 then
     # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
     # https://github.com/bowmanjd/docker-wsl/blob/main/docker-service.sh
