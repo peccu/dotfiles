@@ -172,24 +172,24 @@ function filter-branch-overwrite-git-author(){
     newname="$1"
     shift
     newemail="$1"
-    echo OLD_EMAIL="'$oldemail'"
-    echo CORRECT_NAME="'$newname'"
-    echo CORRECT_EMAIL="'$newemail'"
+    echo OLD_EMAIL="$oldemail"
+    echo CORRECT_NAME="$newname"
+    echo CORRECT_EMAIL="$newemail"
 
     # cf. https://stackoverflow.com/questions/750172/how-do-i-change-the-author-and-committer-name-email-for-multiple-commits/750182#750182
-    git filter-branch --env-filter '
-OLD_EMAIL="'$oldemail'"
-CORRECT_NAME="'$newname'"
-CORRECT_EMAIL="'$newemail'"
-if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+    git filter-branch --env-filter "
+OLD_EMAIL=\"${oldemail}\"
+CORRECT_NAME=\"${newname}\"
+CORRECT_EMAIL=\"${newemail}\"
+if [ \"\$GIT_COMMITTER_EMAIL\" = \"\$OLD_EMAIL\" ]
 then
-    export GIT_COMMITTER_NAME="$CORRECT_NAME"
-    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+    export GIT_COMMITTER_NAME=\"\$CORRECT_NAME\"
+    export GIT_COMMITTER_EMAIL=\"\$CORRECT_EMAIL\"
 fi
-if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+if [ \"\$GIT_AUTHOR_EMAIL\" = \"\$OLD_EMAIL\" ]
 then
-    export GIT_AUTHOR_NAME="$CORRECT_NAME"
-    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+    export GIT_AUTHOR_NAME=\"\$CORRECT_NAME\"
+    export GIT_AUTHOR_EMAIL=\"\$CORRECT_EMAIL\"
 fi
-' --tag-name-filter cat -- --branches --tags
+" --tag-name-filter cat -- --branches --tags
 }
