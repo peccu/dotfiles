@@ -8,6 +8,8 @@ export SNIP_DIR=~/.local/share/snip
 
 function snip(){
     (
+        type bat >/dev/null || echo bat not found
+        type fzf >/dev/null || echo fzf not found
         cd $SNIP_DIR
         for i in snip*
         do
