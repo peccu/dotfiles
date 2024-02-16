@@ -60,3 +60,6 @@ alias tw=the-way
 # bun
 alias bunhere='drunit bun -v "$PWD:/app" -w /app oven/bun:latest'
 alias bunbash='drunbash bun -v "$PWD:/app" -w /app oven/bun:latest'
+
+# time sync with wslact
+alias time-sync='sudo wslact ts'
