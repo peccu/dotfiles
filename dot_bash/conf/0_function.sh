@@ -193,3 +193,45 @@ then
 fi
 " --tag-name-filter cat -- --branches --tags
 }
+
+function tmux-resurrect-cleanup(){
+    cd ~/.tmux/resurrect
+    # backup latest multiple split
+    cp $(\
+             wc -l *.txt \
+                 | awk '$1 != 3{print $2}' \
+                 | grep -v '^total$' \
+                 | sort \
+                 | tail -n 1 \
+       ) ../
+    # remove no splits
+    wc -l *.txt | awk '$1 == 3{print $2}' | xargs rm
+    # remove duplicates
+    for i in $(find ! -empty -type f)
+    do
+        read sum file < <(md5sum $i)
+        echo $file >> /tmp/resurrect_${sum}
+    done
+    if ls /tmp/resurrect_* >/dev/null 2>&1
+    then
+        wc -l /tmp/resurrect_* \
+            | awk '$1 != 1{print $2}' \
+            | grep -v '^total$' \
+            | xargs -I{} bash -c 'sort -r {} | tail -n +2' \
+                    > /tmp/resurrect_target
+        if [ $(wc -l /tmp/resurrect_target | awk '{print $1}') -gt 0 ]
+        then
+            cat /tmp/resurrect_target \
+                | xargs rm
+        fi
+    fi
+    rm /tmp/resurrect_*
+    # link latest multiple split
+    ln -sf $(\
+             wc -l *.txt \
+                 | awk '$1 != 3{print $2}' \
+                 | grep -v '^total$' \
+                 | sort \
+                 | tail -n 1 \
+       ) last
+}
