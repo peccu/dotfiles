@@ -1,5 +1,63 @@
 # -*- shell-script -*-
 
+################################################################
+# from
+# https://github.com/0xacx/chatGPT-shell-cli
+# and it is in ~/.local/bin/chatgpt
+_gpt__escape() {
+    echo "$1" | jq -Rrs 'tojson[1:-1]'
+}
+
+# build user chat message function for /chat/completions (gpt models)
+# builds chat message before request,
+# $1 should be the escaped request prompt,
+# it extends $chat_message
+_gpt__build_user_chat_message() {
+    local escaped_request_prompt="$1"
+    if [ -z "$chat_message" ]; then
+        chat_message="{\"role\": \"user\", \"content\": \"$escaped_request_prompt\"}"
+    else
+        chat_message="$chat_message, {\"role\": \"user\", \"content\": \"$escaped_request_prompt\"}"
+    fi
+}
+
+# adds the assistant response to the message in (chatml) format
+# for /chat/completions (gpt models)
+# keeps messages length under max token limit
+# * $1 should be the escaped response data
+# * it extends and potentially shrinks $chat_message
+_gpt__add_assistant_response_to_chat_message() {
+    local escaped_response_data="$1"
+    # add response to chat context as answer
+    chat_message="$chat_message, {\"role\": \"assistant\", \"content\": \"$escaped_response_data\"}"
+
+    # transform to json array to parse with jq
+    local chat_message_json="[ $chat_message ]"
+    # check prompt length, 1 word =~ 1.3 tokens
+    # reserving 100 tokens for next user prompt
+    while (($(echo "$chat_message" | wc -c) * 1, 3 > (MAX_TOKENS - 100))); do
+        # remove first/oldest QnA from prompt
+        chat_message=$(echo "$chat_message_json" | jq -c '.[2:] | .[] | {role, content}')
+    done
+}
+
+_gpt__log_history() {
+    if [ ! -f ~/.chatgpt_history ]; then
+        touch ~/.chatgpt_history
+        chmod 600 ~/.chatgpt_history
+    fi
+    timestamp=$(date +"%Y-%m-%d %H:%M")
+    echo -e "$timestamp $prompt \n$response_data \n" >>~/.chatgpt_history
+}
+
+# -d '{
+#       "messages": [
+#         {"role": "system", "content": "'"$escaped_system_prompt"'"},
+#         '"$message"'
+#         ]
+#       }'
+################################################################
+
 # TODO supports stdin
 # ref. https://developers.line.biz/en/docs/messaging-api/sticker-list/#sticker-definitions
 
