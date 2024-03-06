@@ -42,6 +42,7 @@ function jqflatten(){
 }
 
 function n(){
+    # in line_notify.sh
     line_notify "$@"
 }
 
