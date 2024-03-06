@@ -236,3 +236,11 @@ function tmux-resurrect-cleanup(){
                  | tail -n 1 \
        ) last
 }
+
+function g(){
+    # in gpt.sh
+    _gpt__groq-gpt "$@"
+    # or
+    # _gpt__openai-gpt "$@"
+    # _gpt__claude-gpt "$@"
+}
