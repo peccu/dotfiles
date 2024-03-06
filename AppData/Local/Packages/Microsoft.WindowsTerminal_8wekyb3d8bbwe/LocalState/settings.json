@@ -34,6 +34,18 @@
         {
             "command": 
             {
+                "action": "globalSummon",
+                "desktop": "any",
+                "dropdownDuration": 0,
+                "monitor": "any",
+                "name": "_quake",
+                "toggleVisibility": false
+            },
+            "keys": "win+`"
+        },
+        {
+            "command": 
+            {
                 "action": "splitPane",
                 "split": "right"
             },
@@ -61,18 +73,6 @@
                 "action": "moveFocus",
                 "direction": "down"
             }
-        },
-        {
-            "command": 
-            {
-                "action": "globalSummon",
-                "desktop": "any",
-                "dropdownDuration": 0,
-                "monitor": "any",
-                "name": "_quake",
-                "toggleVisibility": false
-            },
-            "keys": "win+`"
         },
         {
             "command": "paste",
@@ -279,6 +279,12 @@
                 "hidden": false,
                 "name": "Ubuntu 22.04.3 LTS",
                 "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{cdad9c82-b5c0-5b08-8cb1-317dd41e1b74}",
+                "hidden": false,
+                "name": "AlmaLinuxOS-9",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
