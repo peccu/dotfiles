@@ -52,6 +52,9 @@ alias drun='d run --rm -it --name'
 alias drunit='d run --rm -it --name'
 alias drunbash='d run --rm -it --entrypoint bash --name'
 alias drund='d run --rm -d --name'
+# sort -h is clever!
+# https://www.baeldung.com/linux/docker-sort-images-by-size
+alias dimg='docker image list --format "table {{.Size}}\t{{.ID}}\t{{.Repository}}:{{.Tag}}" | sort -h'
 
 # the-way
 alias th=the-way
