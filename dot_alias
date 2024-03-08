@@ -65,7 +65,7 @@ alias bunbash='drunbash bun -v "$PWD:/app" -w /app oven/bun:latest'
 alias time-sync='sudo wslact ts'
 
 # glow
-alias glow="EDITOR='emacs -Q -nw' ./glow"
+alias glow="EDITOR='emacs -Q -nw' glow"
 alias glw=glow
 if [[ $(type -t compopt) = "builtin" ]]; then
     complete -o default -F __start_glow glw
