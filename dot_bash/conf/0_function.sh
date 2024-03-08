@@ -238,8 +238,17 @@ function tmux-resurrect-cleanup(){
 }
 
 function g(){
+    if exists glow
+    then
+        output='glow -'
+    elif exists bat
+    then
+        output=bat
+    else
+        output='cat -'
+    fi
     # in gpt.sh
-    _gpt__groq-gpt "$@"
+    _gpt__groq-gpt "$@" | $output
     # or
     # _gpt__openai-gpt "$@"
     # _gpt__claude-gpt "$@"

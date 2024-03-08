@@ -79,6 +79,7 @@ function _gpt__prev-output(){
 }
 
 function g_prev-output_bat(){
+    prevfile=$(ls -1t ${_gpt__cachedir} | head -n 1)
     _gpt__prev-output \
         | bat -l md --file-name $prevfile
 }
