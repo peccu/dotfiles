@@ -75,8 +75,17 @@ function _gpt__prep-sessionfile(){
 function _gpt__prev-output(){
     prevfile=$(ls -1t ${_gpt__cachedir} | head -n 1)
     cat ${_gpt__cachedir}/${prevfile} \
-        | _gpt__extract-gpt-message \
+        | _gpt__extract-gpt-message
+}
+
+function g_prev-output_bat(){
+    _gpt__prev-output \
         | bat -l md --file-name $prevfile
+}
+
+function g_prev-output_glow(){
+    _gpt__prev-output \
+        | glow -
 }
 
 function _gpt__general-gpt(){
