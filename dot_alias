@@ -29,7 +29,7 @@ alias z=zellij
 alias cdl='cd $(command ls -tr|tail -n 1)'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 alias e='emacs -Q -nw'
-alias ee='ewsl /aws/.emacs.d'
+alias ee='ewsl /home/user/.emacs.d'
 alias gitco='git checkout --'
 alias jl='jq -C . | less -R'
 alias tf=terraform
@@ -54,7 +54,7 @@ alias drunbash='d run --rm -it --entrypoint bash --name'
 alias drund='d run --rm -d --name'
 # sort -h is clever!
 # https://www.baeldung.com/linux/docker-sort-images-by-size
-alias dimg='docker image list --format "table {{.Size}}\t{{.ID}}\t{{.Repository}}:{{.Tag}}" | sort -h'
+alias dim='docker image list --format "table {{.Size}}\t{{.ID}}\t{{.Repository}}:{{.Tag}}" | sort -h'
 
 # the-way
 alias th=the-way
