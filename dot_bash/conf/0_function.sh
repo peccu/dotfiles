@@ -253,3 +253,14 @@ function g(){
     # _gpt__openai-gpt "$@"
     # _gpt__claude-gpt "$@"
 }
+
+function gitm(){
+    if [ -z "$1" ]
+    then
+        echo "Usage: gitm <branch-name>"
+        return 1
+    fi
+    targetBranch=$1
+    currentBranch=$(git symbolic-ref --short HEAD | tr -d "\n")
+    git merge -m "Merge branch '${targetBranch}' into ${currentBranch}" "${targetBranch}"
+}
