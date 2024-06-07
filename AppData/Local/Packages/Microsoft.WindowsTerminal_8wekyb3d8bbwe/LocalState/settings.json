@@ -241,6 +241,7 @@
     {
         "defaults": 
         {
+            "colorScheme": "Campbell",
             "font": 
             {
                 "face": "FiraCode Nerd Font",
@@ -293,9 +294,9 @@
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
-            "blue": "#0037DA",
+            "blue": "#0075FF",
             "brightBlack": "#767676",
-            "brightBlue": "#3B78FF",
+            "brightBlue": "#379CFF",
             "brightCyan": "#61D6D6",
             "brightGreen": "#16C60C",
             "brightPurple": "#B4009E",
