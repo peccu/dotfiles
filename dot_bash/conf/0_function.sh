@@ -237,6 +237,51 @@ function tmux-resurrect-cleanup(){
        ) last
 }
 
+function tmux-resurrect-fix-by-function-and-restore(){
+    cd ~/.tmux/resurrect
+    echo "remove no splits (3 lines files)"
+    wc -l *.txt | awk '$1 == 3{print $2}' | xargs rm
+
+    echo "remove duplicated files"
+    declare -A filehashes
+    for file in *.txt; do
+        # skip when the file does not exists
+        [ -e "$file" ] || continue
+
+        hash=$(sha256sum "$file" | awk '{print $1}')
+
+        if [[ -n ${filehashes[$hash]} ]]; then
+            # same hash found
+
+            # the file is older than kept file, remove old one (the file)
+            if [[ "$file" -ot "${filehashes[$hash]}" ]]; then
+                # echo "Removing older duplicate file: $file"
+                rm "$file"
+            else
+                # the file is newer than kept file, remove old one (the kept file)
+                # echo "Removing older duplicate file: ${filehashes[$hash]}"
+                rm "${filehashes[$hash]}"
+                # keep newer file
+                filehashes[$hash]=$file
+            fi
+        else
+            # same hash does not founc. keep that file
+            filehashes[$hash]=$file
+        fi
+    done
+
+    echo "link latest multiple split"
+    ln -sf $(\
+             wc -l *.txt \
+                 | awk '$1 != 3{print $2}' \
+                 | grep -v '^total$' \
+                 | sort \
+                 | tail -n 1 \
+       ) last
+    echo "restoring windows and panes"
+    ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh
+}
+
 function g(){
     if exists glow
     then
