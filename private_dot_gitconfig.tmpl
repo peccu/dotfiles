@@ -58,6 +58,10 @@
 [push]
     default = simple
 
+# needs trailing slash
+[url "ssh://git@github.com/use-this/"]
+    insteadOf = git@github.com:need-to-replace/
+
 [include]
     path = .gitalias
     path = .gitconfig_local
