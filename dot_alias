@@ -70,10 +70,12 @@ alias time-sync='sudo wslact ts'
 # glow
 alias glow="EDITOR='emacs -Q -nw' glow"
 alias glw=glow
-if [[ $(type -t compopt) = "builtin" ]]; then
-    complete -o default -F __start_glow glw
-else
-    complete -o default -o nospace -F __start_glow glw
+if echo $SHELL | grep '/bash' > /dev/null; then
+    if [[ $(type -t compopt) = "builtin" ]]; then
+        complete -o default -F __start_glow glw
+    else
+        complete -o default -o nospace -F __start_glow glw
+    fi
 fi
 
 # x-cli
