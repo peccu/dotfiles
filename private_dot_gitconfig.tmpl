@@ -23,6 +23,7 @@
     helper = "!f() { echo \"username=$(cat ~/.githubtoken)\npassword=\"; }; f"
 {{- else }}
     helper = store
+    helper = /usr/local/bin/git-credential-manager
 {{- end }}
 [http]
     sslVerify = false
@@ -65,3 +66,6 @@
 [include]
     path = .gitalias
     path = .gitconfig_local
+
+[credential "https://dev.azure.com"]
+    useHttpPath = true
