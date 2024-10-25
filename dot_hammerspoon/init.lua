@@ -1,3 +1,5 @@
+-- https://www.hammerspoon.org
+
 -- utils
 function isLeftHalf(windowFrame, screenFrame)
    return windowFrame.x == screenFrame.x and windowFrame.w <= screenFrame.w / 2
