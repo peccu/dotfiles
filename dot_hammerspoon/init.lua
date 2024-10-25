@@ -80,6 +80,19 @@ end)
 --     focusTheWindowInScreen(screen)
 -- end)
 
+function focusApp(appName)
+   local app = hs.application.find(appName)
+
+   if app then
+      app:activate()
+   else
+      hs.alert.show("Application not found: " .. appName)
+   end
+end
+hs.hotkey.bind({"ctrl"}, "escape", function()
+      focusApp("WezTerm")
+end)
+
 -- reload conf
 hs.hotkey.bind({"alt", "ctrl"}, "R", function()
   hs.reload()
