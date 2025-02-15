@@ -49,5 +49,16 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGes
 ### Safari
 - Command Click : new tab and focus
 - Command Shift Click : new tab in backgroud
+
 ### Emacs
+needs homebrew to reduce flickering.
+
 ### Wave Term
+[Wave Terminal — Upgrade Your Command Line](https://www.waveterm.dev/)
+
+### nix
+
+### Tailscale
+[Tailscale · Best VPN Service for Secure Networks](https://tailscale.com/)
+
+install app from Mac App Store
