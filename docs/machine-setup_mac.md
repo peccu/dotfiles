@@ -82,6 +82,14 @@ brew install --cask emacs-mac
 
 installed into /Applications/Emacs.app
 
+### .emacs.d
+
+```
+cd
+git clone https://github.com/peccu/dot.emacs.d.git .emacs.d
+git submodule update -i
+```
+
 ### git credential-manager
 
 [git-credential-manager/docs/install.md at release · git-ecosystem/git-credential-manager](https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/install.md)
@@ -135,3 +143,16 @@ chezmoi apply -vn | less
 # apply
 chezmoi apply -v
 ```
+
+### some error?
+
+```
+Cloning into '/Users/peccu/.local/share/snip'...
+remote: Repository not found.
+fatal: repository 'https://gist.github.com/.git/' not found
+chezmoi: .local/share/snip: /Users/peccu/.local/share/snip: exit status 128
+```
+
+You need to add gist id for the-way in `~/.config/chezmoi/chezmoi.toml`.
+
+The ID is in [peccu’s gists](https://gist.github.com/peccu).
