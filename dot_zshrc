@@ -1,0 +1,23 @@
+# https://superuser.com/a/1092328
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+alias emacs='~/Applications/Emacs.app/Contents/MacOS/Emacs'
+alias e='emacs -nw -q'
+alias aws='docker run --rm -v ~/.aws:/mnt/c/Users/user/.aws --entrypoint /usr/local/bin/aws peccu/tool-in-docker:emacs-x'
+alias awsit='docker run -it --rm -v ~/.aws:/mnt/c/Users/user/.aws --entrypoint /usr/local/bin/aws peccu/tool-in-docker:emacs-x'
+
+# for brew installed libffi for cocoapods
+export LDFLAGS="-L/usr/local/opt/libffi/lib"
+export CPPFLAGS="-I/usr/local/opt/libffi/include"
+
+# Disable /etc/zshrc_Apple_Terminal
+export SHELL_SESSION_HISTORY=0
+# share history
+setopt share_history
+export HISTSIZE=100000
+export SAVEHIST=1000000
+export HISTFILE=~/.zsh_history
+
+source ~/.alias
+source ~/.bash/conf/0_function.sh
+source ~/.bash/conf/0_function_local.sh
