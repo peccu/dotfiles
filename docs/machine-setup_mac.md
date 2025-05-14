@@ -279,3 +279,22 @@ t ()
 ```
 
 - setup tpm by `C-t I`
+
+### Fonts
+
+- FiraCode Nerd Font
+
+https://www.nerdfonts.com/font-downloads
+
+https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode
+
+https://github.com/ryanoasis/nerd-fonts/releases
+
+```
+cd ~/Downloads/
+curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.tar.xz
+mkdir FiraCode
+cd FiraCode
+tar xf ../FiraCode.tar.xz
+open FiraCodeNerdFont-Retina.ttf
+```
