@@ -18,6 +18,6 @@ export HISTSIZE=100000
 export SAVEHIST=1000000
 export HISTFILE=~/.zsh_history
 
-source ~/.alias
-source ~/.bash/conf/0_function.sh
-source ~/.bash/conf/0_function_local.sh
+[ -f ~/.alias ] && source ~/.alias
+[ -f ~/.bash/conf/0_function.sh ] && source ~/.bash/conf/0_function.sh
+[ -f ~/.bash/conf/0_function_local.sh ] && source ~/.bash/conf/0_function_local.sh
