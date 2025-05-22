@@ -1,6 +1,8 @@
 # https://superuser.com/a/1092328
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# https://stackoverflow.com/a/29197217
+zstyle ':completion:*' menu select
 alias emacs='~/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias e='emacs -nw -q'
 alias aws='docker run --rm -v ~/.aws:/mnt/c/Users/user/.aws --entrypoint /usr/local/bin/aws peccu/tool-in-docker:emacs-x'
