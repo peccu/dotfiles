@@ -309,3 +309,28 @@ function gitm(){
     currentBranch=$(git symbolic-ref --short HEAD | tr -d "\n")
     git merge -m "Merge branch '${targetBranch}' into ${currentBranch}" "${targetBranch}"
 }
+
+# load project specific functions
+if ls ~/Codes/*/.functions.sh >/dev/null
+then
+    for i in $(ls ~/Codes/*/.functions.sh)
+    do
+        source $i
+    done
+fi
+if ls ~/codes/*/.functions.sh >/dev/null
+then
+    for i in $(ls ~/codes/*/.functions.sh)
+    do
+        source $i
+    done
+fi
+
+# https://yazi-rs.github.io/docs/quick-start
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
