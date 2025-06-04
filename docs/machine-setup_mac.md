@@ -227,6 +227,8 @@ Store paths:        /nix/store/2mpqw8j8vixpnr3k0l0kw8mif8lrry8p-tmux-3.4-man /ni
 
 ```
 nix profile install nixpkgs#delta
+nix profile install nixpkgs#yazi
+nix profile install nixpkgs#lazygit
 ```
 
 ### Tailscale
