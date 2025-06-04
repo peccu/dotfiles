@@ -23,3 +23,4 @@ export HISTFILE=~/.zsh_history
 [ -f ~/.alias ] && source ~/.alias
 [ -f ~/.bash/conf/0_function.sh ] && source ~/.bash/conf/0_function.sh
 [ -f ~/.bash/conf/0_function_local.sh ] && source ~/.bash/conf/0_function_local.sh
+export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
