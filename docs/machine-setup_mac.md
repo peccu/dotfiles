@@ -151,7 +151,7 @@ configs are in `~/.wezterm.lua` which is managed in chezmoi.
 
 - install nix
     - using https://github.com/DeterminateSystems/nix-installer
-    - `curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install macos --nix-build-user-id-base 350`
+    - `curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install macos --nix-build-user-id-base 450 --nix-build-group-id 450`
 
 ```
 % curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install macos --nix-build-user-id-base 350
