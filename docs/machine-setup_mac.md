@@ -97,6 +97,7 @@ needs homebrew to reduce flickering.
 ```
 brew tap railwaycat/emacsmacport
 brew install --cask emacs-mac
+open -a /usr/local/opt/emacs-mac/Emacs.app
 ```
 
 installed into /Applications/Emacs.app
@@ -295,6 +296,8 @@ https://www.hammerspoon.org
 configs are in `~/.hammerspoon/` which is managed in chezmoi.
 
 ### keeweb
+
+https://github.com/keeweb/keeweb/releases
 
 ### tmux
 
