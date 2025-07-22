@@ -19,12 +19,15 @@ kllall Dock
 ```
 
 ### Trackpad
-- Tap to click
-- Two finger tap to right click
-- More gestures are assigned to four fingers
+- Point & Click
+    - Fastest Tracking speed
+    - Lookup & data detectors : Tap with Three Fingers
+    - Secondary click : Click or Tap with Two Fingers
+    - Tap to click
+- More gestures
+    - App Exposé : Swipe Down with Four Fingers
 - Three fingers for dragging
     - (Accesibility > Pointer Control > Trackpad Options > Use trackpad for dragging = on, Dragging style = Three Finger Drag)
-- Three finger tap to Look up
 
 ```zsh
 defaults read com.apple.AppleMultitouchTrackpad
@@ -48,6 +51,22 @@ middle
 - Control to Caps
 - Key repeat : Max speed
 
+#### Shortcut keys
+- Mission Control
+    - disable `C-<up>`, `C-<down>`
+- Keyboard
+    - Move focus to next window `Command-@` to `Command-f2`
+- Input Sources
+    - Select the previous input source `Command-Space`
+- Screenshots
+    - Disable "Screenshot and recording options" `S-Command-5`
+        - for Emacs query-replace
+- Spotlight
+    - Show Spotlight search to `option-Space`
+- Function Keys
+    - check Use F1, F2, etc. keys as standard function keys
+- Modifier Keys
+    - Swap Caps Lock to Control key
 
 ## Apps
 ### Safari
