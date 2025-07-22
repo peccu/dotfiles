@@ -73,6 +73,8 @@ middle
 - Command Click : new tab and focus
 - Command Shift Click : new tab in backgroud
 
+- [Keys](https://apps.apple.com/jp/app/keys-for-safari/id1494642810?l=en-US) for Safari
+
 ### Homebrew
 
 for Emacs and git-credential-manager etc.
