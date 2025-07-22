@@ -248,9 +248,22 @@ Store paths:        /nix/store/2mpqw8j8vixpnr3k0l0kw8mif8lrry8p-tmux-3.4-man /ni
 - install package
 
 ```
-nix profile install nixpkgs#delta
-nix profile install nixpkgs#yazi
-nix profile install nixpkgs#lazygit
+nix profile add nixpkgs#delta
+nix profile add nixpkgs#yazi
+nix profile add nixpkgs#lazygit
+```
+
+```
+for i in colima \
+delta \
+docker \
+jq \
+nodejs_22 \
+skim \
+tmux
+do
+  nix profile add nixpkgs#$i
+done
 ```
 
 ### Docker (colima)
