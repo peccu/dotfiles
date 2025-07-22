@@ -250,6 +250,12 @@ nix profile install nixpkgs#yazi
 nix profile install nixpkgs#lazygit
 ```
 
+### Docker (colima)
+
+```
+colima start --vm-type=vz
+```
+
 ### Tailscale
 [Tailscale · Best VPN Service for Secure Networks](https://tailscale.com/)
 
