@@ -262,6 +262,7 @@ $ nix profile list | grep 'Name:' | awk '{print $2}'
 colima
 delta
 docker
+fd
 jq
 nodejs_22
 ripgrep
