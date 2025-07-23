@@ -69,6 +69,10 @@ middle
     - Swap Caps Lock to Control key
 
 ## Apps
+
+### Finder
+Show hidden files by `Command-Shift-.`
+
 ### Safari
 - Command Click : new tab and focus
 - Command Shift Click : new tab in backgroud
