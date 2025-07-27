@@ -271,11 +271,14 @@ tmux
 ```
 
 ```bash
-for i in colima \
+for i in \
+colima \
 delta \
 docker \
+fd \
 jq \
 nodejs_22 \
+ripgrep \
 skim \
 tmux
 do
