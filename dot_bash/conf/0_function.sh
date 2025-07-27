@@ -311,14 +311,14 @@ function gitm(){
 }
 
 # load project specific functions
-if ls ~/Codes/*/.functions.sh >/dev/null
+if ls '~/Codes/*/.functions.sh' >/dev/null 2>&1
 then
     for i in $(ls ~/Codes/*/.functions.sh)
     do
         source $i
     done
 fi
-if ls ~/codes/*/.functions.sh >/dev/null
+if ls '~/codes/*/.functions.sh' >/dev/null 2>&1
 then
     for i in $(ls ~/codes/*/.functions.sh)
     do
