@@ -282,7 +282,7 @@ ripgrep \
 skim \
 tmux
 do
-  nix profile add nixpkgs#$i
+  nix profile add --debug nixpkgs#$i
 done
 ```
 
