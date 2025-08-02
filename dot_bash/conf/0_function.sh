@@ -334,3 +334,7 @@ function y() {
     [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
     rm -f -- "$tmp"
 }
+
+if [ -x "$(command -v eza)" ]; then
+    alias ls="eza"
+fi
