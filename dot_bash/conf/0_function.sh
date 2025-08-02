@@ -343,6 +343,7 @@ function nix-leaves(){
     nix profile list \
         | grep 'Name:' \
         | awk '{print $2}' \
+        | sed -E 's/\x1b\[[0-9;]*m//g' \
               >~/.bash/conf/.nix-leaves
 }
 
