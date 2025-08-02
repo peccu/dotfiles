@@ -338,3 +338,17 @@ function y() {
 if [ -x "$(command -v eza)" ]; then
     alias ls="eza"
 fi
+
+function nix-leaves(){
+    nix profile list \
+        | grep 'Name:' \
+        | awk '{print $2}' \
+              >~/.bash/conf/.nix-leaves
+}
+
+function nix-sync(){
+    for i in $(cat ~/.bash/conf/.nix-leaves)
+    do
+        nix profile add --debug nixpkgs#$i
+    done
+}

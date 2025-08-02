@@ -262,29 +262,39 @@ $ nix profile list | grep 'Name:' | awk '{print $2}'
 colima
 delta
 docker
+eza
 fd
 jq
+lazygit
 nodejs_22
 ripgrep
 skim
 tmux
+yazi
 ```
+
+-> `nix-leaves`
 
 ```bash
 for i in \
 colima \
 delta \
 docker \
+eza \
 fd \
 jq \
+lazygit \
 nodejs_22 \
 ripgrep \
 skim \
-tmux
+tmux \
+yazi
 do
   nix profile add --debug nixpkgs#$i
 done
 ```
+
+-> `nix-sync`
 
 ### Docker (colima)
 
