@@ -31,3 +31,9 @@
     refreshPeriod = "168h"
     [".local/share/snip".pull]
         args = ["--ff-only"]
+["powerlevel10k"]
+    type = "git-repo"
+    url = "https://github.com/romkatv/powerlevel10k.git"
+    refreshPeriod = "168h"
+    ["powerlevel10k".pull]
+        args = ["--ff-only"]
