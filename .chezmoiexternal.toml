@@ -42,3 +42,7 @@
     executable = true
     url = "https://acli.atlassian.com/darwin/latest/acli_{{ .chezmoi.os }}_{{ .chezmoi.arch }}/acli"
     refreshPeriod = "168h"
+[".zsh/conf/skim-key-bindings.zsh"]
+    type = "file"
+    url = "https://github.com/skim-rs/skim/raw/refs/heads/master/shell/key-bindings.zsh"
+    refreshPeriod = "168h"
