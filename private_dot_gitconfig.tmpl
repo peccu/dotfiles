@@ -8,12 +8,10 @@
     # gitProxy = gitproxy-socat
     quotepath = off
     # editor = emacs
-{{- if .my.tool }}
     # delta https://github.com/dandavison/delta
     # pager = delta --plus-color="#216820" --minus-color="#340001" --theme='Monokai Extended'
     # from 0.7.1 to 0.16.5 change
     pager = delta
-{{- end }}
 [color]
     diff = auto
     status = auto
@@ -29,7 +27,6 @@
     sslVerify = false
 [init]
     defaultBranch = main
-{{- if .my.tool }}
 [interactive]
     diffFilter = delta --color-only
 [diff "xlsx"]
@@ -52,7 +49,6 @@
 #     commit-decoration-style = bold yellow box ul
 #     file-style = bold yellow ul
 #     file-decoration-style = none
-{{- end }}
 [pull]
     rebase = false
     ff = only
