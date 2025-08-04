@@ -37,3 +37,8 @@
     refreshPeriod = "168h"
     ["powerlevel10k".pull]
         args = ["--ff-only"]
+[".local/bin/acli"]
+    type = "file"
+    executable = true
+    url = "https://acli.atlassian.com/darwin/latest/acli_{{ .chezmoi.os }}_{{ .chezmoi.arch }}/acli"
+    refreshPeriod = "168h"

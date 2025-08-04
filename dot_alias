@@ -85,3 +85,8 @@ alias bru='xc run bruno'
 
 # docker
 alias runn='docker run --rm -v "$PWD:/books" ghcr.io/k1low/runn:latest'
+
+# jira
+if [ -x "$(command -v acli)" ]; then
+    alias jira="acli jira"
+fi
