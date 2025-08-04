@@ -335,10 +335,6 @@ function y() {
     rm -f -- "$tmp"
 }
 
-if [ -x "$(command -v eza)" ]; then
-    alias ls="eza"
-fi
-
 function nix-leaves(){
     nix profile list \
         | grep 'Name:' \
