@@ -1,5 +1,7 @@
+bat
 colima
 delta
+direnv
 docker
 eza
 fd
