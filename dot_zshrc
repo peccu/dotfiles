@@ -52,3 +52,8 @@ fpath=(~/.zsh/fpath $fpath)
 
 # tmp loads
 [[ ! -f ~/.zsh/conf/skim-key-bindings.zsh ]] || source ~/.zsh/conf/skim-key-bindings.zsh
+
+# setup zoxide (autojump alt)
+# needs compinit
+# setup j and ji
+eval "$(zoxide init zsh --cmd j)"
