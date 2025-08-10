@@ -82,7 +82,8 @@ for Emacs and git-credential-manager etc.
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/peccu/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 #+end_src
-*** Emacs
+
+*** Emacs 29.1
 needs homebrew to reduce flickering.
 
 [railwaycat/homebrew-emacsmacport: Emacs mac port formulae for the Homebrew package manager](https://github.com/railwaycat/homebrew-emacsmacport)
@@ -94,6 +95,13 @@ needs homebrew to reduce flickering.
 #+end_src
 
 installed into /Applications/Emacs.app
+
+*** Emacs 30
+
+#+begin_src shell
+  brew install emacs-app --cask
+#+end_src
+
 *** .emacs.d
 #+begin_src shell
   cd
