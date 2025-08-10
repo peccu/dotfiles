@@ -89,33 +89,34 @@ bind-key b command-prompt -p "join pane from:"  "join-pane -s '%%'"
 
 
 # status line
-# http://qiita.com/nojima/items/9bc576c922da3604a72b
-# カレントウィンドウの window-status のフォーマットを指定する
-set-window-option -g window-status-current-format "#[fg=colour255,bg=colour27,bold] #I: #W #[default]"
-# # status line を更新する間隔を 1 秒にする
-# set-option -g status-interval 1
-# # window-status を中央揃えで配置する
-# set-option -g status-justify "centre"
-# # status line の背景色を指定する。
-# set-option -g status-bg "colour238"
-set -g status-bg cyan
-# # status line の文字色を指定する。
-# set-option -g status-fg "colour255"
-# # status-left の最大の長さを指定する。
-# set-option -g status-left-length 20
-# # status-left のフォーマットを指定する。
-# set-option -g status-left "#[fg=colour255,bg=colour241]Session: #S #[default]"
-# # status-right の最大の長さを指定する。
-# set-option -g status-right-length 60
-# # status-right のフォーマットを指定する。
-# set-option -g status-right "#[fg=colour255,bg=colour241] #h | LA: #(cut -d' ' -f-3 /proc/loadavg) | %m/%d %H:%M:%S#[default]"
-# # window-status のフォーマットを指定する。
-# set-window-option -g window-status-format " #I: #W "
+# -> tmux2k
+# # http://qiita.com/nojima/items/9bc576c922da3604a72b
+# # カレントウィンドウの window-status のフォーマットを指定する
+# set-window-option -g window-status-current-format "#[fg=colour255,bg=colour27,bold] #I: #W #[default]"
+# # # status line を更新する間隔を 1 秒にする
+# # set-option -g status-interval 1
+# # # window-status を中央揃えで配置する
+# # set-option -g status-justify "centre"
+# # # status line の背景色を指定する。
+# # set-option -g status-bg "colour238"
+# set -g status-bg cyan
+# # # status line の文字色を指定する。
+# # set-option -g status-fg "colour255"
+# # # status-left の最大の長さを指定する。
+# # set-option -g status-left-length 20
+# # # status-left のフォーマットを指定する。
+# # set-option -g status-left "#[fg=colour255,bg=colour241]Session: #S #[default]"
+# # # status-right の最大の長さを指定する。
+# # set-option -g status-right-length 60
+# # # status-right のフォーマットを指定する。
+# # set-option -g status-right "#[fg=colour255,bg=colour241] #h | LA: #(cut -d' ' -f-3 /proc/loadavg) | %m/%d %H:%M:%S#[default]"
+# # # window-status のフォーマットを指定する。
+# # set-window-option -g window-status-format " #I: #W "
 
-# see nerd font cheat sheet like `seq`
-# https://www.nerdfonts.com/cheat-sheet
-# set -g status-right '#{prefix_highlight}#{net_speed} %m/%d %H:%M'
-set -g status-right '#{prefix_highlight} Continuum:#{continuum_status} %m/%d %H:%M'
+# # see nerd font cheat sheet like `seq`
+# # https://www.nerdfonts.com/cheat-sheet
+# # set -g status-right '#{prefix_highlight}#{net_speed} %m/%d %H:%M'
+# set -g status-right '#{prefix_highlight} Continuum:#{continuum_status} %m/%d %H:%M'
 
 
 # Character pair  Replaced with
