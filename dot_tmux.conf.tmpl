@@ -222,5 +222,10 @@ set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 ## tmux2k
 set -g @plugin '2kabhishek/tmux2k'
 set -g @tmux2k-theme 'onedark'
+set -g @tmux2k-left-plugins "session cwd"
+set -g @tmux2k-right-plugins "cpu ram battery weather time"
+set -g @tmux2k-time-format "%a%H:%M"
+set -g @tmux2k-weather-display-condition false
+set -g @tmux2k-weather-location "Osaka,Japan"
 
 run -b '~/.tmux/plugins/tpm/tpm'
