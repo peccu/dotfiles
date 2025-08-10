@@ -195,6 +195,7 @@ bind -n M-g popup -E "snip"
 # install with C-t I
 # or call ~/.tmux/plugins/tpm/bindings/install_plugins directly
 set -g @plugin 'tmux-plugins/tpm'
+
 ## save restore sessions
 # default directory is ~/.local/share/tmux/resurrect but if ~/.tmux/resurrect is exists, it will override.
 # in chezmoi, ~/.tmux/resurrect should be created
@@ -203,6 +204,7 @@ set -g @continuum-save-interval '1'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 ## auto save (each 15min.) and reload
 set -g @plugin 'tmux-plugins/tmux-continuum'
+
 ## manage tmux with fzf
 set -g @plugin 'sainnhe/tmux-fzf'
 TMUX_FZF_LAUNCH_KEY="C-f"
@@ -210,13 +212,14 @@ TMUX_FZF_OPTIONS="-p -w 90% -h 40% -m"
 TMUX_FZF_MENU=\
 "foo\necho 'Hello!'\n"\
 "bar\nls ~\n"
+
 ## show tmux prefix key
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 # ## show net speed
 # set -g @plugin 'tmux-plugins/tmux-net-speed'
 # set -g @net_speed_format "D:%3s U:%3s"
 
-# tmux2k
+## tmux2k
 set -g @plugin '2kabhishek/tmux2k'
 set -g @tmux2k-theme 'onedark'
 
