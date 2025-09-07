@@ -9,48 +9,48 @@ function isRightHalf(windowFrame, screenFrame)
    return windowFrame.x > screenFrame.x and windowFrame.w <= screenFrame.w / 2
 end
 
--- move windows : alt ctrl + left/right
-hs.hotkey.bind({"alt", "ctrl"}, "Left", function()
-      local win = hs.window.focusedWindow()
-      local screen = win:screen()
-      local frame = win:frame()
-      local screenFrame = screen:frame()
+-- -- move windows : alt ctrl + left/right
+-- hs.hotkey.bind({"alt", "ctrl"}, "Left", function()
+--       local win = hs.window.focusedWindow()
+--       local screen = win:screen()
+--       local frame = win:frame()
+--       local screenFrame = screen:frame()
 
-      if isLeftHalf(frame, screenFrame) then
-         local previousScreen = screen:previous()
+--       if isLeftHalf(frame, screenFrame) then
+--          local previousScreen = screen:previous()
 
-         if previousScreen then
-            win:moveToScreen(previousScreen)
-            win:moveToUnit(hs.layout.right50)
-         end
-      else
-         win:moveToUnit(hs.layout.left50)
-      end
-end)
+--          if previousScreen then
+--             win:moveToScreen(previousScreen)
+--             win:moveToUnit(hs.layout.right50)
+--          end
+--       else
+--          win:moveToUnit(hs.layout.left50)
+--       end
+-- end)
 
-hs.hotkey.bind({"alt", "ctrl"}, "Right", function()
-      local win = hs.window.focusedWindow()
-      local screen = win:screen()
-      local frame = win:frame()
-      local screenFrame = screen:frame()
+-- hs.hotkey.bind({"alt", "ctrl"}, "Right", function()
+--       local win = hs.window.focusedWindow()
+--       local screen = win:screen()
+--       local frame = win:frame()
+--       local screenFrame = screen:frame()
 
-      if isRightHalf(frame, screenFrame) then
-         local nextScreen = screen:next()
+--       if isRightHalf(frame, screenFrame) then
+--          local nextScreen = screen:next()
 
-         if nextScreen then
-            win:moveToScreen(nextScreen)
-            win:moveToUnit(hs.layout.left50)
-         end
-      else
-         win:moveToUnit(hs.layout.right50)
-      end
-end)
+--          if nextScreen then
+--             win:moveToScreen(nextScreen)
+--             win:moveToUnit(hs.layout.left50)
+--          end
+--       else
+--          win:moveToUnit(hs.layout.right50)
+--       end
+-- end)
 
--- maximize window
-hs.hotkey.bind({"alt", "ctrl"}, "Up", function()
-  local win = hs.window.focusedWindow()
-  win:moveToUnit(hs.layout.maximized)
-end)
+-- -- maximize window
+-- hs.hotkey.bind({"alt", "ctrl"}, "Up", function()
+--   local win = hs.window.focusedWindow()
+--   win:moveToUnit(hs.layout.maximized)
+-- end)
 
 -- -- move focus
 -- function focusTheWindowInScreen(screen)
