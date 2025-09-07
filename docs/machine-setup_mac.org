@@ -294,9 +294,11 @@ installed into /Applications/Emacs.app
 #+end_example
 ***** You need to add gist id for the-way in =~/.config/chezmoi/chezmoi.toml=.
 ***** The ID is in [peccu’s gists](https://gist.github.com/peccu).
-*** hammerspoon
+*** hammerspoon : shortcut keys
 **** https://www.hammerspoon.org
 **** configs are in =~/.hammerspoon/= which is managed in chezmoi.
+*** Rectangle : move windows
+**** =brew install --cask rectangle=
 *** keeweb
 **** https://github.com/keeweb/keeweb/releases
 *** tmux
