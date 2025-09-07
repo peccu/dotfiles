@@ -184,10 +184,20 @@ bind -Tcopy-mode-vi MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \
 bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X cancel
 {{- end }}
 
+## Popup
 # popup snippet copy
 # needs fzf and bat
 # defined in ~/.local/bin/snip and ~/.bash/conf/snippet-manager.sh
 bind -n M-g popup -E "snip"
+
+# popup zsh
+bind -n M-t display-popup \
+  -d "#{pane_current_path}" \
+  -x C \
+  -y C \
+  -w 90% \
+  -h 70% \
+  -E 'zsh'
 
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

@@ -94,3 +94,7 @@ fi
 if [ -x "$(command -v acli)" ]; then
     alias jira="acli jira"
 fi
+
+# Tmux display-popup
+# add env var with -e "POPUP=true"
+alias tp='tmux display-popup -d "#{pane_current_path}" -x C -y C -w 90% -h 70% -E'
