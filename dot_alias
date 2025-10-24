@@ -101,3 +101,6 @@ alias tp='tmux display-popup -d "#{pane_current_path}" -x C -y C -w 90% -h 70% -
 
 # lazy docker
 alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock lazyteam/lazydocker'
+
+# sudo hack for usimg alias with sudo
+alias sudo='sudo '
