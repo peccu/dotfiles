@@ -1,4 +1,14 @@
 {
     "github.copilot.nextEditSuggestions.enabled": true,
-    "editor.fontFamily": "'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace"
+    "editor.fontFamily": "'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+    "editor.accessibilitySupport": "off",
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    }
 }
