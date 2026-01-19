@@ -32,13 +32,17 @@ export HISTFILE=~/.zsh_history
 [ -f ~/.bash/conf/0_function_local.sh ] && source ~/.bash/conf/0_function_local.sh
 export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
 
+# Python
+[ -d ~/Library/Python/3.9/bin ] && export PATH="$PATH:~/Library/Python/3.9/bin"
+
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f ~/.dart-cli-completion/zsh-config.zsh ]] && . ~/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
 [ -d /opt/homebrew/opt/ruby/bin ] && export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-[ -d /opt/homebrew/opt/ruby@3.1/bin ] && export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
+# [ -d /opt/homebrew/opt/ruby@3.1/bin ] && export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
+[ -d /opt/homebrew/opt/ruby@3.4/bin ] && export PATH="/opt/homebrew/opt/ruby@3.4/bin:$PATH"
 
 [ -d ~/.local/bin ] && export PATH="~/.local/bin:$PATH"
 
