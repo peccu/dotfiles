@@ -1,0 +1,13 @@
+gui:
+  showRandomTip: true
+  nerdFontsVersion: "3"
+  # Format used when displaying time e.g. commit time.
+  # Uses Go's time format syntax: https://pkg.go.dev/time#Time.Format
+  timeFormat: 02 Jan 06
+
+  # Format used when displaying time if the time is less than 24 hours ago.
+  # Uses Go's time format syntax: https://pkg.go.dev/time#Time.Format
+  shortTimeFormat: 3:04PM
+
+git:
+  autoFetch: false
