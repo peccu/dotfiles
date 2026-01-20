@@ -188,7 +188,16 @@ bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; s
 # popup snippet copy
 # needs fzf and bat
 # defined in ~/.local/bin/snip and ~/.bash/conf/snippet-manager.sh
-bind -n M-g popup -E "snip"
+# bind -n M-g popup -E "snip"
+
+## lazygit
+bind -n M-g display-popup \
+  -d "#{pane_current_path}" \
+  -x C \
+  -y C \
+  -w 90% \
+  -h 70% \
+  -E "lazygit"
 
 # popup zsh
 bind -n M-t display-popup \
