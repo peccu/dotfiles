@@ -1,74 +1,7 @@
 #!/usr/bin/env zsh
 # -*- shell[zsh] -*-
-# based on https://dev.to/tomoviktor/best-way-to-open-urls-in-your-terminal-via-tmux-595b
-# https://github.com/11Firefox11/.dotfiles/blob/main/bin/.local/scripts/tmux-select-url
-
-name="select-url"
-message_time_period=1500
-buffer_file_name="tmuxsave"
-menu_max_items=5
-open=open
-fzf=sk
-
-# --- actual script starts here ---
-echo 1
-
-if [ -z "$TMUX" ]; then
-    echo "This script must be ran with TMUX variable context."
-    exit 1
-fi
-
-echo 2
-
-is_full=false
-if [[ $1 == "full" ]]; then
-    tmux capture-pane -J -S "-" -p > "${TMPDIR:-/tmp/}${buffer_file_name}"
-else
-    tmux capture-pane -J -p > "${TMPDIR:-/tmp/}${buffer_file_name}"
-fi
-
-echo 3
-
-echo "${TMPDIR:-/tmp/}${buffer_file_name}"
-cat "${TMPDIR:-/tmp/}${buffer_file_name}" | wc -l
-
-echo 4
-urls=$(grep -Eoi "(http|https)://[a-zA-Z0-9+./?=_%:-]+(#[-a-zA-Z0-9_]*)?" "${TMPDIR:-/tmp/}${buffer_file_name}" | sort | uniq)
-
-echo 5
-
-if [[ -z $urls ]]; then
-    echo 6
-    tmux display-message -d "$message_time_period" "#[fg=red bold]$name: No URL found#[bg=red bold]"
-    exit 0
-fi
-echo 7
-
-url_count=$(echo "$urls" | wc -l)
-echo 8
-echo count $url_count
-if [ $url_count -eq 1 ]; then
-    echo 9
-    $open $urls > /dev/null 2>&1 && tmux display-message -d $message_time_period "#[bold]$name: Opened $urls#[bold]"
-elif [ $url_count -gt $menu_max_items ]; then
-    echo 10
-    tmux neww -n "url-select" "printf '%s\n' '$urls' | $fzf --exit-0 | xargs -I {} sh -c '$open \"{}\" && tmux display-message \"#[bold]$name: Opened {}#[bold]\"'"
-else
-    echo 11
-    tmux_menu="tmux display-menu -t 1 -T 'url-select'"
-    index=1
-    for url in ${(f)urls}; do
-        clean_url=${url#*//}
-
-        tmux_menu="$tmux_menu '$clean_url' $index 'run-shell \"$open $url > /dev/null 2>&1; tmux display-message '\''#[bold]$name: Opened $url#[bold]'\''\"'"
-
-        ((index++))
-        if [ $index -gt 9 ]; then
-            break
-        fi
-    done
-
-    eval $tmux_menu
-    echo 12
-fi
-echo 13
+tmux capture-pane -J -S - -p \
+    | rg -o 'https?://[\w./?=_%:-]+' \
+    | sort -u \
+    | sk --multi \
+    | xargs open
