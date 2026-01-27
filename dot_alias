@@ -104,3 +104,9 @@ alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock lazy
 
 # sudo hack for usimg alias with sudo
 alias sudo='sudo '
+
+# VSCode
+alias code='~/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+
+# GitLab
+alias gm='glab mr'
