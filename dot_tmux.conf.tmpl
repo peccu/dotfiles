@@ -215,10 +215,9 @@ bind -n M-u display-popup \
   -w 90% \
   -h 70% \
   -E "tmux capture-pane -J -S - -p \
-    | rg -o 'https?://[\w./?=_%:-]+' \
-    | sort -u \
-    | sk --multi \
-    | xargs open"
+  | rg -o 'https?://[\w./?=_%:-]+' \
+  | sk --multi \
+  | xargs open"
 
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
