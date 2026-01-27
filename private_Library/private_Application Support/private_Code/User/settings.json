@@ -25,4 +25,11 @@
   "dart.flutterShowWebServerDevice": "always",
   "dart.devToolsBrowser": "default",
   "diffEditor.ignoreTrimWhitespace": false,
+  "prettier.singleQuote": true,
+  "yaml.format.singleQuote": true,
+  "dart.debugExternalPackageLibraries": false,
+  "dart.debugSdkLibraries": false,
+  "editor.pasteAs.preferences": [
+    "chat.attach.text"
+  ],
 }
