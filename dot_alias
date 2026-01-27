@@ -106,7 +106,16 @@ alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock lazy
 alias sudo='sudo '
 
 # VSCode
-alias code='~/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+if [ -x ~/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]; then
+    alias code='~/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+fi
 
 # GitLab
-alias gm='glab mr'
+if [ -x "$(command -v glab)" ]; then
+    alias gm='glab mr'
+fi
+
+# GitHub Copilot CLI
+if [ -x "$(command -v copilot)" ]; then
+    alias cop="copilot --model claude-opus-4.5 --allow-tool 'shell(git:*)' --deny-tool 'shell(git push)'"
+fi
