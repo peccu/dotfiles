@@ -45,7 +45,7 @@ export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
 # [ -d /opt/homebrew/opt/ruby@3.1/bin ] && export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
 [ -d /opt/homebrew/opt/ruby@3.4/bin ] && export PATH="/opt/homebrew/opt/ruby@3.4/bin:$PATH"
 
-[ -d ~/.local/bin ] && export PATH="~/.local/bin:$PATH"
+[ -d ~/.local/bin ] && export PATH="$HOME/.local/bin:$PATH"
 
 # Activate p10k
 source ~/powerlevel10k/powerlevel10k.zsh-theme
