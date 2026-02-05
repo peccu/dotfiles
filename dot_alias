@@ -112,7 +112,14 @@ fi
 
 # GitLab
 if [ -x "$(command -v glab)" ]; then
+    alias g=glab
     alias gm='glab mr'
+    # glab co
+    alias gco='glab mr checkout'
+    alias gmc='glab mr checkout'
+    alias gmd='glab mr diff'
+    alias gmv='glab mr view'
+    alias gml='glab mr list'
 fi
 
 # GitHub Copilot CLI

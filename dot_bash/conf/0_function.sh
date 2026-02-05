@@ -282,22 +282,22 @@ function tmux-resurrect-fix-by-function-and-restore(){
     ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh
 }
 
-function g(){
-    if exists glow
-    then
-        output='glow -'
-    elif exists bat
-    then
-        output=bat
-    else
-        output='cat -'
-    fi
-    # in gpt.sh
-    _gpt__groq-gpt "$@" | $output
-    # or
-    # _gpt__openai-gpt "$@"
-    # _gpt__claude-gpt "$@"
-}
+# function g(){
+#     if exists glow
+#     then
+#         output='glow -'
+#     elif exists bat
+#     then
+#         output=bat
+#     else
+#         output='cat -'
+#     fi
+#     # in gpt.sh
+#     _gpt__groq-gpt "$@" | $output
+#     # or
+#     # _gpt__openai-gpt "$@"
+#     # _gpt__claude-gpt "$@"
+# }
 
 function gitm(){
     if [ -z "$1" ]
