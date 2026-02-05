@@ -29,7 +29,6 @@
   "yaml.format.singleQuote": true,
   "dart.debugExternalPackageLibraries": false,
   "dart.debugSdkLibraries": false,
-  "editor.pasteAs.preferences": [
-    "chat.attach.text"
-  ],
+  "editor.pasteAs.preferences": ["chat.attach.text"],
+  "scm.repositories.selectionMode": "single",
 }
