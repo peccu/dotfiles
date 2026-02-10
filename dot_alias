@@ -10,6 +10,7 @@ alias gl="git clone"
 alias gu="git fetch --tags --prune && git pull origin"
 # this branch
 alias tb="git symbolic-ref --short HEAD | tr -d \"\\n\""
+alias gs="git switch \$(git b -l --format '%(refname:short)' | sk)"
 # git status(st) lfs
 alias stl='git lfs status'
 alias push-u-this-branch='git push -u origin HEAD'
