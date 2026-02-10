@@ -53,9 +53,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# add fpath
-fpath=(~/.zsh/fpath $fpath)
-
 # tmp loads
 [[ ! -f ~/.zsh/conf/skim-key-bindings.zsh ]] || source ~/.zsh/conf/skim-key-bindings.zsh
 
