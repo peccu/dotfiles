@@ -199,6 +199,15 @@ bind -n M-g display-popup \
   -h 70% \
   -E "lazygit"
 
+## copilot
+bind -n M-p display-popup \
+  -d "#{pane_current_path}" \
+  -x C \
+  -y C \
+  -w 90% \
+  -h 70% \
+  -E "zsh -c 'echo Copilot;copilot --model gpt-4.1'"
+
 # popup zsh
 bind -n M-t display-popup \
   -d "#{pane_current_path}" \
@@ -218,6 +227,12 @@ bind -n M-u display-popup \
   | rg -o 'https?://[\w./?=_%:-]+' \
   | sk --multi \
   | xargs open"
+
+# dimensions
+bind C-g display-popup \
+  -w 80% \
+  -h 80% \
+  -E "~/.local/bin/dimensions"
 
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
