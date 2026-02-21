@@ -31,4 +31,6 @@
   "dart.debugSdkLibraries": false,
   "editor.pasteAs.preferences": ["chat.attach.text"],
   "scm.repositories.selectionMode": "single",
+  "dart.showTodos": true,
+  "chat.agent.maxRequests": 50,
 }
