@@ -355,4 +355,20 @@ function glp(){
     local thisbranch=$(git symbolic-ref --short HEAD | tr -d "\n")
     local baseURL=$(git remote get-url origin | sed 's/\.git$//')
     open "$baseURL/-/merge_requests/new?merge_request%5Bsource_branch%5D=$thisbranch"
+
+function brew-leaves(){
+    brew leaves >~/.local/share/chezmoi/docs/exported_config/brew-leaves
+    brew list --cask -1 >~/.local/share/chezmoi/docs/exported_config/brew-cask-leaves
 }
+
+function brew-sync(){
+    for i in $(cat ~/.local/share/chezmoi/docs/exported_config/brew-leaves)
+    do
+        brew install $i
+    done
+    for i in $(cat ~/.local/share/chezmoi/docs/exported_config/brew-cask-leaves)
+    do
+        brew install --cask $i
+    done
+>>>>>>> 1beb8b2 (add brew related)
+

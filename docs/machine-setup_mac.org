@@ -69,6 +69,7 @@
 **** Command Shift Click : new tab in backgroud
 **** [Keys](https://apps.apple.com/jp/app/keys-for-safari/id1494642810?l=en-US) for Safari
 *** Homebrew
+**** setup
 for Emacs and git-credential-manager etc.
 
 [Homebrew — The Missing Package Manager for macOS (or Linux)](https://brew.sh/)
@@ -82,7 +83,8 @@ for Emacs and git-credential-manager etc.
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/peccu/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 #+end_src
-
+**** leaves
+**** install all
 *** Emacs 29.1
 needs homebrew to reduce flickering.
 
@@ -299,6 +301,7 @@ installed into /Applications/Emacs.app
 **** configs are in =~/.hammerspoon/= which is managed in chezmoi.
 *** Rectangle : move windows
 **** =brew install --cask rectangle=
+**** import config in ~/.local/share/chezmoi/docs/exported_config/RectangleConfig.json
 *** keeweb
 **** https://github.com/keeweb/keeweb/releases
 *** tmux
