@@ -42,8 +42,10 @@ function jqflatten(){
 }
 
 function n(){
-    # in line_notify.sh
-    line_notify "$@"
+    # # in line_notify.sh
+    # line_notify "$@"
+    # in slack_notify.sh
+    slack_notify "$@"
 }
 
 function C(){
