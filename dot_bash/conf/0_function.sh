@@ -370,5 +370,5 @@ function brew-sync(){
     do
         brew install --cask $i
     done
->>>>>>> 1beb8b2 (add brew related)
+}
 
