@@ -33,4 +33,5 @@
   "scm.repositories.selectionMode": "single",
   "dart.showTodos": true,
   "chat.agent.maxRequests": 50,
+  "claudeCode.preferredLocation": "panel",
 }
