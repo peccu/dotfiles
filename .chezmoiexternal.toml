@@ -46,3 +46,8 @@
     type = "file"
     url = "https://github.com/skim-rs/skim/raw/refs/heads/master/shell/key-bindings.zsh"
     refreshPeriod = "168h"
+[".local/bin/tt"]
+    type = "file"
+    executable = true
+    url = "https://gitlab.com/steveslatky/tt/-/raw/main/tt?ref_type=heads"
+    refreshPeriod = "168h"
