@@ -42,11 +42,6 @@ export HISTFILE=~/.zsh_history
 [[ -f ~/.dart-cli-completion/zsh-config.zsh ]] && . ~/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
-# setup zoxide (autojump alt)
-# needs compinit
-# setup j and ji
-eval "$(zoxide init zsh --cmd j)"
-
 # load config files
 if [ -d ~/.zsh/conf ]
 then
