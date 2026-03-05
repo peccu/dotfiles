@@ -3,3 +3,9 @@
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# add TMUX_PANE
+function prompt_my_tmux_pane() {
+    p10k segment -b teal -t "%$TMUX_PANE"
+}
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=my_tmux_pane
