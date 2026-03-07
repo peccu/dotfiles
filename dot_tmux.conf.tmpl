@@ -243,7 +243,10 @@ bind C-g display-popup \
 bind C-w display-popup \
   -w 80% \
   -h 80% \
-  -E "~/.local/bin/tt"
+  -e TT_ROOTS="$HOME/Codes" \
+  -e TT_FILE_DEPTH=4 \
+  -E \
+  "$HOME/.local/bin/tt"
 
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
