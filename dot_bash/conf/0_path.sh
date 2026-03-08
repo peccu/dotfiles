@@ -10,4 +10,5 @@ export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
 [ -d /opt/homebrew/opt/ruby/bin ] && export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 # [ -d /opt/homebrew/opt/ruby@3.1/bin ] && export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
 [ -d /opt/homebrew/opt/ruby@3.4/bin ] && export PATH="/opt/homebrew/opt/ruby@3.4/bin:$PATH"
-
+# prefer bash in homebrew for tmux2k
+[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:$PATH"
