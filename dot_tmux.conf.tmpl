@@ -288,4 +288,8 @@ set -g @tmux2k-weather-display-condition "false"
 set -g @tmux2k-weather-display-location "false"
 set -g @tmux2k-weather-location "Osaka,Japan"
 
+# dim inactive panes
+set -g window-style 'bg=colour234'
+set -g window-active-style 'bg=terminal'
+
 run -b '~/.tmux/plugins/tpm/tpm'
