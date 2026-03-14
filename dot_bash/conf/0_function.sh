@@ -374,3 +374,8 @@ function brew-sync(){
         brew install --cask $i
     done
 }
+
+function review(){
+    branch=$1
+    claude "/code-review $branch ブランチをレビューしてください"
+}
