@@ -225,14 +225,22 @@
     "disableBypassPermissionsMode": "disable",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true
   },
   "effortLevel": "medium",
   "teammateMode": "tmux",
-  "statusLine": {
-    "type": "command",
-    "command": "sh ~/.claude/statusline-command.sh"
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
   }
 }
