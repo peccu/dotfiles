@@ -63,7 +63,6 @@
       "Bash(gofmt:*)"
     ],
     "deny": [
-      "Bash(git push *)",
       "Read(~/.aws/**)",
       "Read(%USERPROFILE%\\.aws\\**)",
       "Read(~/.ssh/id_*)",
@@ -233,8 +232,6 @@
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true
   },
-  "effortLevel": "medium",
-  "teammateMode": "tmux",
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
@@ -242,5 +239,7 @@
         "repo": "anthropics/claude-plugins-official"
       }
     }
-  }
+  },
+  "effortLevel": "medium",
+  "teammateMode": "tmux"
 }
