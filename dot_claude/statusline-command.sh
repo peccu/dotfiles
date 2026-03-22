@@ -50,32 +50,32 @@ if [ -n "$cwd" ] && git -C "$cwd" rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 user_name=$(whoami)
-host_name=$(hostname -s)
+tmux_pane="${TMUX_PANE:-}"
 
 # ── Extract all data at once with a single jq call ──
 eval "$(echo "$input" | jq -r '
-  def s: . // "" | tostring;
-  "cost_usd=\(.cost.total_cost_usd // "")",
-  "duration_ms=\(.cost.total_duration_ms // "")",
-  "api_ms=\(.cost.total_api_duration_ms // "")",
-  "lines_add=\(.cost.total_lines_added // "")",
-  "lines_del=\(.cost.total_lines_removed // "")",
-  "ctx_pct=\(.context_window.used_percentage // "")",
-  "ctx_size=\(.context_window.context_window_size // "")",
-  "in_tok=\(.context_window.total_input_tokens // "")",
-  "out_tok=\(.context_window.total_output_tokens // "")",
-  "cache_read=\(.context_window.current_usage.cache_read_input_tokens // "")",
-  "cache_write=\(.context_window.current_usage.cache_creation_input_tokens // "")",
-  "rl5_pct=\(.rate_limits.five_hour.used_percentage // "")",
-  "rl5_reset=\(.rate_limits.five_hour.resets_at // "")",
-  "rl7_pct=\(.rate_limits.seven_day.used_percentage // "")",
-  "rl7_reset=\(.rate_limits.seven_day.resets_at // "")",
-  "model=\(.model.display_name // "")",
-  "model_id=\(.model.id // "")",
-  "session_id=\(.session_id // "")",
-  "version=\(.version // "")",
-  "vim_mode=\(.vim.mode // "")",
-  "agent_name=\(.agent.name // "")"
+  def v: . // "" | tostring | @sh;
+  "cost_usd=\(.cost.total_cost_usd | v)",
+  "duration_ms=\(.cost.total_duration_ms | v)",
+  "api_ms=\(.cost.total_api_duration_ms | v)",
+  "lines_add=\(.cost.total_lines_added | v)",
+  "lines_del=\(.cost.total_lines_removed | v)",
+  "ctx_pct=\(.context_window.used_percentage | v)",
+  "ctx_size=\(.context_window.context_window_size | v)",
+  "in_tok=\(.context_window.total_input_tokens | v)",
+  "out_tok=\(.context_window.total_output_tokens | v)",
+  "cache_read=\(.context_window.current_usage.cache_read_input_tokens | v)",
+  "cache_write=\(.context_window.current_usage.cache_creation_input_tokens | v)",
+  "rl5_pct=\(.rate_limits.five_hour.used_percentage | v)",
+  "rl5_reset=\(.rate_limits.five_hour.resets_at | v)",
+  "rl7_pct=\(.rate_limits.seven_day.used_percentage | v)",
+  "rl7_reset=\(.rate_limits.seven_day.resets_at | v)",
+  "model=\(.model.display_name | v)",
+  "model_id=\(.model.id | v)",
+  "session_id=\(.session_id | v)",
+  "version=\(.version | v)",
+  "vim_mode=\(.vim.mode | v)",
+  "agent_name=\(.agent.name | v)"
 ' 2>/dev/null)"
 
 # ── Colors ──
@@ -108,7 +108,11 @@ color_pct() {
 # ═══════════════════════════════════════════════════
 printf "${C_CYAN}%s${C_RESET}" "$short_dir"
 [ -n "$git_branch" ] && printf " ${C_YELLOW}(%s)${C_RESET}" "$git_branch"
-printf " ${C_GREEN}%s@%s${C_RESET}" "$user_name" "$host_name"
+if [ -n "$tmux_pane" ]; then
+  printf " ${C_GREEN}%s@%s${C_RESET}" "$user_name" "$tmux_pane"
+else
+  printf " ${C_GREEN}%s${C_RESET}" "$user_name"
+fi
 [ -n "$model" ] && printf " ${C_MAGENTA}%s${C_RESET}" "$model"
 [ -n "$ctx_pct" ] && printf " ${C_LABEL}ctx:%s%%${C_RESET}" "$ctx_pct"
 printf "\n"
