@@ -248,7 +248,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "sh ~/.claude/statusline-command.sh",
+    "command": "sh ~/.claude/scripts/statusline-command.sh",
     "padding": 6
   },
   "enabledPlugins": {
