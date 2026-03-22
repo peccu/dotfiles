@@ -34,4 +34,5 @@
   "dart.showTodos": true,
   "chat.agent.maxRequests": 50,
   "claudeCode.preferredLocation": "panel",
+  "dart.openDevTools": "flutter",
 }
