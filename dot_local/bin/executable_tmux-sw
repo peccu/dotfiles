@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+# tmux-sw: switch to a tmux session/window using skim
+
+if ! command -v sk >/dev/null 2>&1; then
+    echo "Error: sk (skim) is required" >&2
+    exit 1
+fi
+
+if ! tmux list-sessions &>/dev/null; then
+    echo "Error: no tmux server running" >&2
+    exit 1
+fi
+
+selection=$(
+    tmux list-windows -a -F '#{session_name}:#{window_index}  #{window_name}#{?window_active, *,}' \
+    | sk --prompt="Switch> " --no-sort
+) || exit 0
+
+target="${selection%%  *}"
+
+if [[ -n "${TMUX:-}" ]]; then
+    tmux switch-client -t "$target"
+else
+    tmux attach-session -t "$target"
+fi

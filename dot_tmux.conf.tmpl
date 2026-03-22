@@ -239,14 +239,12 @@ bind C-g display-popup \
   -h 80% \
   -E "~/.local/bin/dimensions"
 
-# tt
+# tmux-sw: switch session/window with skim
 bind C-w display-popup \
   -w 80% \
   -h 80% \
-  -e TT_ROOTS="$HOME/Codes" \
-  -e TT_FILE_DEPTH=4 \
   -E \
-  "$HOME/.local/bin/tt"
+  "$HOME/.local/bin/tmux-sw"
 
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -287,6 +285,9 @@ set -g @tmux2k-time-format "%a%H:%M"
 set -g @tmux2k-weather-display-condition "false"
 set -g @tmux2k-weather-display-location "false"
 set -g @tmux2k-weather-location "Osaka,Japan"
+
+# Claude Code: stashしたペインに戻る
+bind p run-shell '~/.claude/scripts/pane-stash-back.sh'
 
 # dim inactive panes
 set -g window-style 'bg=colour235'
