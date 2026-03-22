@@ -163,7 +163,6 @@
       "Bash(kubectl:*)",
       "Bash(aws:*)",
       "Bash(az:*)",
-      "Bash(gcloud:*)",
       "Bash(terraform apply:*)",
       "Bash(terraform destroy:*)",
       "Bash(npm publish:*)",
@@ -225,9 +224,32 @@
     "additionalDirectories": []
   },
   "model": "opus[1m]",
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify-hook.sh '✅' '入力待ちです'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify-hook.sh '⏹' '停止しました'"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
-    "command": "sh ~/.claude/statusline-command.sh"
+    "command": "sh ~/.claude/statusline-command.sh",
+    "padding": 6
   },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true
@@ -240,6 +262,6 @@
       }
     }
   },
-  "effortLevel": "medium",
+  "effortLevel": "high",
   "teammateMode": "tmux"
 }
