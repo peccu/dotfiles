@@ -2,6 +2,6 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM=xterm-256color
-export EDITOR='_editor () { emacs -Q -nw --eval "(progn (require (quote dired)) (set-face-foreground (quote dired-directory) \"#5C7AFF\"))" "$@"|| zile "$@"|| nano "$@" || vi "$@"; } ; _editor'
+export EDITOR='_editor () { emacs -Q -nw -l ~/.emacs.d/minimal.el "$@" || zile "$@" || nano "$@" || vi "$@"; } ; _editor'
 # needs git-credential-manager github login
 export GCM_CREDENTIAL_STORE=plaintext
