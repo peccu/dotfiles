@@ -253,14 +253,15 @@ bind C-w display-popup \
 # or call ~/.tmux/plugins/tpm/bindings/install_plugins directly
 set -g @plugin 'tmux-plugins/tpm'
 
-## save restore sessions
-# default directory is ~/.local/share/tmux/resurrect but if ~/.tmux/resurrect is exists, it will override.
-# in chezmoi, ~/.tmux/resurrect should be created
-set -g @continuum-restore 'on'
-set -g @continuum-save-interval '1'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-## auto save (each 15min.) and reload
-set -g @plugin 'tmux-plugins/tmux-continuum'
+## tmux2k (must be loaded before continuum so continuum's status-right injection survives)
+set -g @plugin '2kabhishek/tmux2k'
+set -g @tmux2k-theme 'onedark'
+set -g @tmux2k-left-plugins "session cwd"
+set -g @tmux2k-right-plugins "cpu ram battery weather time"
+set -g @tmux2k-time-format "%a%H:%M"
+set -g @tmux2k-weather-display-condition "false"
+set -g @tmux2k-weather-display-location "false"
+set -g @tmux2k-weather-location "Osaka,Japan"
 
 ## manage tmux with fzf
 set -g @plugin 'sainnhe/tmux-fzf'
@@ -276,15 +277,14 @@ set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 # set -g @plugin 'tmux-plugins/tmux-net-speed'
 # set -g @net_speed_format "D:%3s U:%3s"
 
-## tmux2k
-set -g @plugin '2kabhishek/tmux2k'
-set -g @tmux2k-theme 'onedark'
-set -g @tmux2k-left-plugins "session cwd"
-set -g @tmux2k-right-plugins "cpu ram battery weather time"
-set -g @tmux2k-time-format "%a%H:%M"
-set -g @tmux2k-weather-display-condition "false"
-set -g @tmux2k-weather-display-location "false"
-set -g @tmux2k-weather-location "Osaka,Japan"
+## save restore sessions
+# default directory is ~/.local/share/tmux/resurrect but if ~/.tmux/resurrect is exists, it will override.
+# in chezmoi, ~/.tmux/resurrect should be created
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '1'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+## auto save (each 15min.) and reload — must be AFTER tmux2k
+set -g @plugin 'tmux-plugins/tmux-continuum'
 
 # Claude Code: stashしたペインに戻る
 bind p run-shell '~/.claude/scripts/pane-stash-back.sh'

@@ -379,3 +379,7 @@ function review(){
     branch=$1
     claude "/code-review $branch ブランチをレビューしてください"
 }
+
+function buddy(){
+    (cd ~/Codes/misc/my-brain && claude)
+}
