@@ -381,5 +381,5 @@ function review(){
 }
 
 function buddy(){
-    (cd ~/Codes/misc/my-brain && claude)
+    (cd ~/Codes/misc/my-brain && claude --resume)
 }
