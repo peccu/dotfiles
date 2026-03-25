@@ -50,7 +50,6 @@ if [ -n "$cwd" ] && git -C "$cwd" rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 user_name=$(whoami)
-tmux_pane="${TMUX_PANE:-}"
 
 # ── Extract all data at once with a single jq call ──
 eval "$(echo "$input" | jq -r '
@@ -108,11 +107,7 @@ color_pct() {
 # ═══════════════════════════════════════════════════
 printf "${C_CYAN}%s${C_RESET}" "$short_dir"
 [ -n "$git_branch" ] && printf " ${C_YELLOW}(%s)${C_RESET}" "$git_branch"
-if [ -n "$tmux_pane" ]; then
-  printf " ${C_GREEN}%s@%s${C_RESET}" "$user_name" "$tmux_pane"
-else
-  printf " ${C_GREEN}%s${C_RESET}" "$user_name"
-fi
+printf " ${C_GREEN}%s${C_RESET}" "$user_name"
 [ -n "$model" ] && printf " ${C_MAGENTA}%s${C_RESET}" "$model"
 [ -n "$ctx_pct" ] && printf " ${C_LABEL}ctx:%s%%${C_RESET}" "$ctx_pct"
 printf "\n"
@@ -204,6 +199,6 @@ if command -v tmux >/dev/null 2>&1 && [ -n "$TMUX" ]; then
   printf "${C_LABEL}tmux:${C_RESET} "
   printf "${C_YELLOW}%s${C_RESET}" "$tmux_session"
   printf "${C_LABEL} | W:${C_RESET}${C_CYAN}%s${C_RESET}${C_LABEL}(%sw)${C_RESET}" "$tmux_window" "$tmux_win_count"
-  printf "${C_LABEL} | P:${C_RESET}${C_GREEN}%s${C_RESET}${C_LABEL}(%sp)${C_RESET}" "$tmux_pane" "$tmux_pane_count"
+  printf "${C_LABEL} | P:${C_RESET}${C_GREEN}%s%s${C_RESET}${C_LABEL}(%sp)${C_RESET}" "$tmux_pane" "$TMUX_PANE" "$tmux_pane_count"
   printf "\n"
 fi

@@ -60,7 +60,9 @@
       "Bash(pylint:*)",
       "Bash(black:*)",
       "Bash(rustfmt:*)",
-      "Bash(gofmt:*)"
+      "Bash(gofmt:*)",
+      "Bash(open https:*)",
+      "Bash(open http:*)"
     ],
     "deny": [
       "Read(~/.aws/**)",
@@ -219,7 +221,7 @@
       "Edit(**/go.sum)",
       "Edit(**/.git/**)"
     ],
-    "defaultMode": "acceptEdits",
+    "defaultMode": "default",
     "disableBypassPermissionsMode": "disable",
     "additionalDirectories": []
   },
@@ -249,7 +251,7 @@
   "statusLine": {
     "type": "command",
     "command": "sh ~/.claude/scripts/statusline-command.sh",
-    "padding": 6
+    "padding": 0
   },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true
