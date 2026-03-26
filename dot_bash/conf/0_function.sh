@@ -394,3 +394,11 @@ function gwc(){
 function gwm(){
     cd "$(git worktree list | head -1 | awk '{print $1}')"
 }
+
+function gwr(){
+    local main=$(git worktree list | head -1 | awk '{print $1}')
+    git worktree list | tail -n +2 | sk --multi --height 40% | awk '{print $1}' | while read -r dir; do
+        git worktree remove "$dir" && echo "Removed: $dir"
+    done
+    cd "$main"
+}
