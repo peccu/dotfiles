@@ -383,3 +383,14 @@ function review(){
 function buddy(){
     (cd ~/Codes/misc/my-brain && claude --resume)
 }
+
+alias gwl='git worktree list'
+
+function gwc(){
+    local dir=$(git worktree list | sk --height 40% | awk '{print $1}')
+    [ -n "$dir" ] && cd "$dir"
+}
+
+function gwm(){
+    cd "$(git worktree list | head -1 | awk '{print $1}')"
+}
