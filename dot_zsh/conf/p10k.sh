@@ -6,6 +6,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # add TMUX_PANE
 function prompt_my_tmux_pane() {
-    p10k segment -b teal -t "%$TMUX_PANE"
+    local title=$(tmux display-message -p '#{pane_title}' 2>/dev/null | cut -c1-15)
+    p10k segment -b teal -t "$TMUX_PANE $title"
 }
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=my_tmux_pane
