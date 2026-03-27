@@ -93,8 +93,12 @@ set -as terminal-features 'xterm*:extkeys'
 # http://d.hatena.ne.jp/kozo2/20111202/1322827858
 # アクティブpaneを指定したwindowに移動する
 bind-key j command-prompt -p "send pane to:"  "join-pane -t '%%'"
-# 指定したpaneをアクティブwindowに連れてくる
-bind-key b command-prompt -p "join pane from:"  "join-pane -s '%%'"
+# skim でペインを選んで今のペインと入れ替え (switch-buffer 的)
+bind-key b display-popup -E "\
+  tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index}  [#{window_name}]  #{pane_current_command}  #{pane_title}' \
+  | sk \
+  | awk '{print \$1}' \
+  | xargs -I{} tmux swap-pane -s {}"
 
 
 # status line
