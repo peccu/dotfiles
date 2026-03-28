@@ -213,14 +213,14 @@ bind -n M-g display-popup \
   -h 70% \
   -E "lazygit"
 
-## copilot
+## claude
 bind -n M-p display-popup \
   -d "#{pane_current_path}" \
   -x C \
   -y C \
   -w 90% \
   -h 70% \
-  -E "zsh -c 'echo Copilot;copilot --model gpt-4.1'"
+  -E "zsh -c 'echo Claude;claude'"
 
 # popup zsh
 bind -n M-t display-popup \
@@ -249,7 +249,7 @@ bind C-g display-popup \
   -E "~/.local/bin/dimensions"
 
 # tmux-sw: switch session/window with skim
-bind C-w display-popup \
+bind -n M-q display-popup \
   -w 80% \
   -h 80% \
   -E \
