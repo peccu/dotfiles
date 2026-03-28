@@ -411,7 +411,7 @@ function ask-run(){
         return 1
     fi
     echo "実行コマンド: $cmd"
-    read -r -p "[Y/n] " ans
+    printf "[Y/n] " && read -r ans
     case "$ans" in
         ""|[Yy]*) eval "$cmd" ;;
         *) echo "キャンセルしました" ;;
