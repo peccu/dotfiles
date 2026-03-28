@@ -402,3 +402,22 @@ function gwr(){
     done
     cd "$main"
 }
+
+function ask-run(){
+    local cmd
+    cmd=$(claude -p "$1")
+    if [ -z "$cmd" ]; then
+        echo "コマンドを取得できませんでした"
+        return 1
+    fi
+    echo "実行コマンド: $cmd"
+    read -r -p "[Y/n] " ans
+    case "$ans" in
+        ""|[Yy]*) eval "$cmd" ;;
+        *) echo "キャンセルしました" ;;
+    esac
+}
+
+function dev-server(){
+    ask-run 'devサーバ起動コマンドを教えて。そのまま実行できるようにplain textでcode blockにせずコマンドだけ出力してください'
+}

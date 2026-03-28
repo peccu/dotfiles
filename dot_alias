@@ -128,3 +128,6 @@ fi
 if [ -x "$(command -v copilot)" ]; then
     alias cop="copilot --model claude-opus-4.5 --allow-tool 'shell(git:*)' --deny-tool 'shell(git push)'"
 fi
+
+# dev-server
+alias ds='dev-server'
