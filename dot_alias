@@ -133,4 +133,4 @@ fi
 alias ds='dev-server'
 
 # Claude Code
-alias c=claude
+alias c='claude -n "${PWD##*/}"'
