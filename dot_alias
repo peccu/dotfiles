@@ -133,4 +133,4 @@ fi
 alias ds='dev-server'
 
 # Claude Code
-alias c='claude -n "${PWD##*/}"'
+alias c='claude -n "$(echo "${PWD/#$HOME/~}" | awk -F/ "{for(i=1;i<NF;i++) printf substr(\$i,1,1)\"/\"; print \$NF}")"'
