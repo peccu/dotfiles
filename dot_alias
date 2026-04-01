@@ -131,3 +131,6 @@ fi
 
 # dev-server
 alias ds='dev-server'
+
+# Claude Code
+alias c=claude
