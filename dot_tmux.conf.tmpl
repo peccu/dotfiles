@@ -1,5 +1,5 @@
 # reload this file
-bind r source-file ~/.tmux.conf \; display-message "Reload Config!!"
+bind r source-file ~/.tmux.conf \; run-shell -b "sleep 2 && ~/.tmux/adaptive-status.sh" \; display-message "Reload Config!!"
 # Prefix
 set-option -g prefix C-t
 unbind-key C-b
@@ -268,12 +268,24 @@ set -g @plugin 'tmux-plugins/tpm'
 ## tmux2k (must be loaded before continuum so continuum's status-right injection survives)
 set -g @plugin '2kabhishek/tmux2k'
 set -g @tmux2k-theme 'onedark'
-set -g @tmux2k-left-plugins "session cwd"
+# Adaptive status: hidden/trimmed when narrow (e.g. SSH from phone), full on wide.
+# Lists are read by ~/.tmux/adaptive-status.sh via the hooks below.
+set -g @tmux2k-width-threshold 100
+set -g @tmux2k-left-plugins-wide  "session cwd"
+set -g @tmux2k-left-plugins-narrow "session"
+set -g @tmux2k-right-plugins-wide "cpu ram battery weather time"
+set -g @tmux2k-right-plugins-narrow ""
+# Defaults applied at first tpm load; the hook below narrows them on small screens.
+set -g @tmux2k-left-plugins  "session cwd"
 set -g @tmux2k-right-plugins "cpu ram battery weather time"
 set -g @tmux2k-time-format "%a%H:%M"
 set -g @tmux2k-weather-display-condition "false"
 set -g @tmux2k-weather-display-location "false"
 set -g @tmux2k-weather-location "Osaka,Japan"
+
+# Re-evaluate left/right plugins whenever a client attaches or resizes.
+set-hook -g client-attached 'run-shell "~/.tmux/adaptive-status.sh"'
+set-hook -g client-resized  'run-shell "~/.tmux/adaptive-status.sh"'
 
 ## manage tmux with fzf
 set -g @plugin 'sainnhe/tmux-fzf'
