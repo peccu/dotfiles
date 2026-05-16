@@ -41,8 +41,10 @@ else
     right="$right_wide"
 fi
 
-last=$(tmux show -gv @tmux2k-adaptive-applied 2>/dev/null)
-[ "$last" = "$mode" ] && exit 0
+# No early-exit on @tmux2k-adaptive-applied == mode: a tmux.conf reload (or
+# any other path that re-runs 2k.tmux) can rewrite status-left/right while the
+# applied flag stays put, leaving the bar stuck on the wrong mode. flock above
+# already debounces resize storms, so re-applying every time is safe and cheap.
 
 # Use a harmless placeholder so tmux2k doesn't substitute its built-in default.
 # We override these sides to empty afterwards.
