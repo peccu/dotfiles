@@ -258,6 +258,13 @@ bind -n M-q display-popup \
   -E \
   "$HOME/.local/bin/tmux-sw"
 
+# tmux-group-session: create grouped session (or kill current) with skim picker
+bind -n M-G display-popup \
+  -w 60% \
+  -h 50% \
+  -E \
+  "$HOME/.local/bin/tmux-group-session"
+
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # reload this file with tmux source ~/.tmux.conf
