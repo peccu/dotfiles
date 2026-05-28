@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+# tmux-os-window-overlay: designed to run inside a `tmux display-popup -E`.
+# Fires a big [N] overlay (embedded ASCII art) on every OTHER tmux client
+# (= other OS windows), shows an input prompt on the current popup, and
+# jumps via wezterm-window-jump.
+#
+# Mapping: WezTerm's tty_name == tmux's client_tty. Index N is the
+# window_id-sorted position, matching the [N] prefix from
+# format-window-title in dot_wezterm.lua.
+#
+# Notes on shells:
+# - Outer script runs in bash (shebang).
+# - Inner popup body runs in $SHELL (zsh for this user), so it is kept
+#   POSIX-only: just centers and prints a pre-rendered art string.
+
+set -uo pipefail
+
+WEZTERM="${WEZTERM:-}"
+if [ -z "$WEZTERM" ]; then WEZTERM="$(command -v wezterm || true)"; fi
+if [ -z "$WEZTERM" ] || [ ! -x "$WEZTERM" ]; then
+  for cand in \
+    "/Users/$(whoami)/Applications/WezTerm.app/Contents/MacOS/wezterm" \
+    "/Applications/WezTerm.app/Contents/MacOS/wezterm"; do
+    if [ -x "$cand" ]; then WEZTERM="$cand"; break; fi
+  done
+fi
+if [ -z "$WEZTERM" ] || [ ! -x "$WEZTERM" ]; then
+  echo "wezterm not found" >&2; sleep 2; exit 1
+fi
+
+mapping="$(
+  "$WEZTERM" cli list --format json \
+    | jq -r '
+        group_by(.window_id)
+        | sort_by(.[0].window_id)
+        | to_entries[]
+        | (.value | map(select(.is_active == true))[0] // .value[0]) as $p
+        | "\(.key + 1)\t\($p.tty_name)"
+      '
+)"
+if [ -z "$mapping" ]; then
+  echo "no wezterm windows" >&2; sleep 2; exit 1
+fi
+
+tmux_ttys="$(tmux list-clients -F '#{client_tty}' 2>/dev/null || true)"
+self_tty="$(tmux display-message -p '#{client_tty}' 2>/dev/null || true)"
+
+# Render "[N]" as a 5-row ASCII art string. Run in bash (outer).
+render_art() {
+  local s="$1"
+  local -a row=('' '' '' '' '')
+  local i ch
+  for (( i = 0; i < ${#s}; i++ )); do
+    ch="${s:i:1}"
+    case "$ch" in
+      0) row[0]+='█████ '; row[1]+='█   █ '; row[2]+='█   █ '; row[3]+='█   █ '; row[4]+='█████ ' ;;
+      1) row[0]+='   █  '; row[1]+='  ██  '; row[2]+='   █  '; row[3]+='   █  '; row[4]+='  ███ ' ;;
+      2) row[0]+='█████ '; row[1]+='    █ '; row[2]+='█████ '; row[3]+='█     '; row[4]+='█████ ' ;;
+      3) row[0]+='█████ '; row[1]+='    █ '; row[2]+=' ████ '; row[3]+='    █ '; row[4]+='█████ ' ;;
+      4) row[0]+='█   █ '; row[1]+='█   █ '; row[2]+='█████ '; row[3]+='    █ '; row[4]+='    █ ' ;;
+      5) row[0]+='█████ '; row[1]+='█     '; row[2]+='█████ '; row[3]+='    █ '; row[4]+='█████ ' ;;
+      6) row[0]+='█████ '; row[1]+='█     '; row[2]+='█████ '; row[3]+='█   █ '; row[4]+='█████ ' ;;
+      7) row[0]+='█████ '; row[1]+='    █ '; row[2]+='   █  '; row[3]+='  █   '; row[4]+=' █    ' ;;
+      8) row[0]+='█████ '; row[1]+='█   █ '; row[2]+='█████ '; row[3]+='█   █ '; row[4]+='█████ ' ;;
+      9) row[0]+='█████ '; row[1]+='█   █ '; row[2]+='█████ '; row[3]+='    █ '; row[4]+='█████ ' ;;
+      '[') row[0]+='███ '; row[1]+='█   '; row[2]+='█   '; row[3]+='█   '; row[4]+='███ ' ;;
+      ']') row[0]+='███ '; row[1]+='  █ '; row[2]+='  █ '; row[3]+='  █ '; row[4]+='███ ' ;;
+    esac
+  done
+  printf '%s\n' "${row[@]}"
+}
+
+# Visual column width of the rendered art for a given source string.
+# Each digit glyph is 6 cols, each bracket 4 cols. Avoids the multibyte
+# byte-vs-char ambiguity of awk/wc.
+art_width() {
+  local s="$1"
+  local w=0 i ch
+  for (( i = 0; i < ${#s}; i++ )); do
+    ch="${s:i:1}"
+    case "$ch" in
+      [0-9])    w=$((w + 6)) ;;
+      '['|']')  w=$((w + 4)) ;;
+    esac
+  done
+  echo "$w"
+}
+
+# POSIX-only body that centers a pre-rendered art string.
+overlay_body() {
+  local art="$1"
+  local width="$2"
+  cat <<SH
+clear
+tput civis 2>/dev/null
+tput bold 2>/dev/null
+tput setaf 11 2>/dev/null
+cols=\$(tput cols 2>/dev/null || echo 40)
+rows=\$(tput lines 2>/dev/null || echo 10)
+pad=\$(( (cols - $width) / 2 )); [ \$pad -lt 0 ] && pad=0
+top=\$(( (rows - 5) / 2 )); [ \$top -lt 0 ] && top=0
+i=0
+while [ \$i -lt \$top ]; do printf '\n'; i=\$((i+1)); done
+printf '%s\n' "$art" | sed "s/^/\$(printf '%*s' \$pad '')/"
+sleep 3
+SH
+}
+
+# Fire overlays on every other tmux client
+while IFS=$'\t' read -r idx tty; do
+  [ -z "$tty" ] && continue
+  [ "$tty" = "$self_tty" ] && continue
+  if printf '%s\n' "$tmux_ttys" | grep -qx "$tty"; then
+    art="$(render_art "[$idx]")"
+    width="$(art_width "[$idx]")"
+    body="$(overlay_body "$art" "$width")"
+    tmux display-popup -c "$tty" -w 90% -h 90% -E "$body" &
+  fi
+done <<< "$mapping"
+
+# Hand off selection to wezterm-window-jump's sk picker (which also focuses).
+clear
+exec wezterm-window-jump

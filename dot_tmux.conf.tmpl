@@ -265,6 +265,13 @@ bind -n M-G display-popup \
   -E \
   "$HOME/.local/bin/tmux-group-session"
 
+# tmux-os-window-overlay: flash [N] on every OS window, prompt for jump target
+bind -n M-s display-popup \
+  -w 25% \
+  -h 30% \
+  -E \
+  "$HOME/.local/bin/tmux-os-window-overlay"
+
 # https://github.com/tmux-plugins/tpm
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # reload this file with tmux source ~/.tmux.conf
