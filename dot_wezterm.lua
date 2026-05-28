@@ -20,7 +20,7 @@ config.send_composed_key_when_right_alt_is_pressed = false
 -- window in the window_id-sorted list. Stable per session, used by
 -- `wezterm-window-jump` to identify windows.
 wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
-  local current_id = tab:window():window_id()
+  local current_id = tab.window_id
   local ids = {}
   for _, w in ipairs(wezterm.mux.all_windows()) do
     table.insert(ids, w:window_id())
@@ -33,8 +33,7 @@ wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
       break
     end
   end
-  local title = pane:get_title()
-  return string.format('[%d] %s', idx, title)
+  return string.format('[%d] %s', idx, pane.title)
 end)
 
 -- Key bindings
