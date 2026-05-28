@@ -16,6 +16,27 @@ config.font_size = 14.0
 config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 
+-- OS window numbering: prefix title with [N] where N is the position of this
+-- window in the window_id-sorted list. Stable per session, used by
+-- `wezterm-window-jump` to identify windows.
+wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
+  local current_id = tab:window():window_id()
+  local ids = {}
+  for _, w in ipairs(wezterm.mux.all_windows()) do
+    table.insert(ids, w:window_id())
+  end
+  table.sort(ids)
+  local idx = 0
+  for i, id in ipairs(ids) do
+    if id == current_id then
+      idx = i
+      break
+    end
+  end
+  local title = pane:get_title()
+  return string.format('[%d] %s', idx, title)
+end)
+
 -- Key bindings
 local act = wezterm.action
 config.keys = {

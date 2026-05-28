@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# wezterm-window-jump: pick a WezTerm OS window via sk and focus it.
+#
+# Uses the same window_id sort order that dot_wezterm.lua uses for the [N]
+# title prefix, so the indices shown here match what appears in title bars.
+
+set -euo pipefail
+
+# Locate wezterm binary. Prefer PATH; fall back to user's app bundle.
+WEZTERM="${WEZTERM:-}"
+if [ -z "$WEZTERM" ]; then
+  WEZTERM="$(command -v wezterm || true)"
+fi
+if [ -z "$WEZTERM" ] || [ ! -x "$WEZTERM" ]; then
+  for cand in \
+    "/Users/$(whoami)/Applications/WezTerm.app/Contents/MacOS/wezterm" \
+    "/Applications/WezTerm.app/Contents/MacOS/wezterm"; do
+    if [ -x "$cand" ]; then WEZTERM="$cand"; break; fi
+  done
+fi
+if [ -z "$WEZTERM" ] || [ ! -x "$WEZTERM" ]; then
+  echo "wezterm not found in PATH or standard app locations" >&2
+  exit 1
+fi
+
+# One row per OS window (first active pane of the window).
+# Columns: index<TAB>pane_id<TAB>title
+rows="$(
+  "$WEZTERM" cli list --format json \
+    | jq -r '
+        group_by(.window_id)
+        | sort_by(.[0].window_id)
+        | to_entries[]
+        | (.value | map(select(.is_active == true))[0] // .value[0]) as $p
+        | "\(.key + 1)\t\($p.pane_id)\t\($p.title)"
+      '
+)"
+
+if [ -z "$rows" ]; then
+  echo "no WezTerm windows" >&2
+  exit 1
+fi
+
+# Direct-jump form: `wezterm-window-jump 3` activates window 3 without sk.
+if [ "$#" -ge 1 ]; then
+  target_idx="$1"
+  pane_id="$(printf '%s\n' "$rows" | awk -F '\t' -v i="$target_idx" '$1 == i {print $2; exit}')"
+  if [ -z "$pane_id" ]; then
+    echo "no window with index $target_idx" >&2
+    exit 1
+  fi
+  "$WEZTERM" cli activate-pane --pane-id "$pane_id"
+  exit 0
+fi
+
+# Interactive form: sk picker. Display index + title (col 1 and 3).
+choice="$(printf '%s\n' "$rows" | sk -d $'\t' --with-nth=1,3 --prompt='window > ')"
+[ -z "$choice" ] && exit 0
+pane_id="$(printf '%s' "$choice" | cut -f2)"
+"$WEZTERM" cli activate-pane --pane-id "$pane_id"
