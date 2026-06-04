@@ -17,7 +17,7 @@ if ! tmux list-sessions &>/dev/null; then
 fi
 
 selection=$(
-    tmux list-windows -a -F '#{session_name}:#{window_index}  #{window_name}#{?window_active, *,}' \
+    tmux list-windows -a -F '#{session_name}:#{window_index}  #{window_name} [#{pane_current_command}]#{?window_active, *,}  #{s|#{HOME}|~|:pane_current_path}' \
     | sk --prompt="Switch> " --no-sort
 ) || exit 0
 

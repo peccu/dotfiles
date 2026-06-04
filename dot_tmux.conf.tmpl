@@ -258,6 +258,13 @@ bind -n M-q display-popup \
   -E \
   "$HOME/.local/bin/tmux-sw"
 
+# tmux-claude-jump: jump to a Claude Code pane by live status (needs-input first)
+bind -n M-c display-popup \
+  -w 80% \
+  -h 80% \
+  -E \
+  "$HOME/.local/bin/tmux-claude-jump"
+
 # tmux-group-session: create grouped session (or kill current) with skim picker
 bind -n M-G display-popup \
   -w 60% \
