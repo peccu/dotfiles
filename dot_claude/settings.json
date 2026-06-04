@@ -265,5 +265,7 @@
     }
   },
   "effortLevel": "high",
-  "teammateMode": "tmux"
+  "preferredNotifChannel": "terminal_bell",
+  "teammateMode": "tmux",
+  "skipAutoPermissionPrompt": true
 }
