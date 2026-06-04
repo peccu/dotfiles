@@ -75,6 +75,7 @@ set -g default-terminal "xterm-256color"
 set -ga terminal-overrides ",*256col*:Tc"
 
 # enable extended keys (Shift+Enter etc.) for Claude Code
+set -g allow-passthrough on
 set -g extended-keys on
 set -as terminal-features 'xterm*:extkeys'
 
