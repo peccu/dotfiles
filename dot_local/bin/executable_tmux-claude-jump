@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-set -o errexit
 set -o pipefail
 set -o nounset
 
 # tmux-claude-jump: list tmux panes running Claude Code with their live status
 # (captured from the pane contents, not the stale terminal title) and jump to the
 # selected one with skim. Panes waiting for a response are sorted to the top.
+# Auto-refreshes every 3 seconds via sk --listen / --remote IPC.
 
 if ! command -v sk >/dev/null 2>&1; then
     echo "Error: sk (skim) is required" >&2
@@ -25,9 +25,8 @@ green=$'\033[32m'
 dim=$'\033[2m'
 reset=$'\033[0m'
 
-declare -A seen
-
 build_list() {
+    declare -A seen
     while IFS=$'\t' read -r pane_id loc wname cpath ccmd; do
         # Grouped sessions share the same panes; show each underlying pane once.
         [[ -n "${seen[$pane_id]:-}" ]] && continue
@@ -63,11 +62,37 @@ build_list() {
     )
 }
 
+sorted_list() {
+    build_list | sort -t$'\t' -k1,1n | cut -f2-
+}
+
+# --list-only: just output the sorted list (called by the auto-refresh background process)
+if [[ "${1:-}" == "--list-only" ]]; then
+    sorted_list
+    exit 0
+fi
+
+SOCKET="tmux-claude-jump-$$"
+SCRIPT="$(realpath "$0")"
+REFRESH_INTERVAL=15
+
+# Background process: send reload every REFRESH_INTERVAL seconds via IPC
+(
+    sleep 0.5  # give sk time to start listening
+    while true; do
+        sleep "$REFRESH_INTERVAL"
+        echo "reload($SCRIPT --list-only)" | sk --remote "$SOCKET" 2>/dev/null || true
+    done
+) &
+REFRESHER_PID=$!
+trap 'kill "$REFRESHER_PID" 2>/dev/null; wait "$REFRESHER_PID" 2>/dev/null; true' EXIT
+
 selection=$(
-    build_list \
-        | sort -t$'\t' -k1,1n \
-        | cut -f2- \
-        | sk --prompt="Claude> " --no-sort --ansi
+    sorted_list \
+        | sk --listen "$SOCKET" \
+             --prompt="Claude> " \
+             --no-sort --ansi \
+             --header "auto-refresh ${REFRESH_INTERVAL}s"
 ) || exit 0
 
 [[ -z "$selection" ]] && exit 0
