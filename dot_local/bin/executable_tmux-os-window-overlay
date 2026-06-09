@@ -28,6 +28,7 @@ if [ -z "$WEZTERM" ] || [ ! -x "$WEZTERM" ]; then
   echo "wezterm not found" >&2; sleep 2; exit 1
 fi
 
+printf 'Querying windows...\r'
 mapping="$(
   "$WEZTERM" cli list --format json \
     | jq -r '
@@ -38,6 +39,7 @@ mapping="$(
         | "\(.key + 1)\t\($p.tty_name)"
       '
 )"
+printf '\033[2K\r'
 if [ -z "$mapping" ]; then
   echo "no wezterm windows" >&2; sleep 2; exit 1
 fi
