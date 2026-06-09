@@ -76,23 +76,24 @@ SOCKET="tmux-claude-jump-$$"
 SCRIPT="$(realpath "$0")"
 REFRESH_INTERVAL=15
 
-# Background process: send reload every REFRESH_INTERVAL seconds via IPC
+# Background process: initial load after sk socket is ready, then periodic refresh
 (
-    sleep 0.5  # give sk time to start listening
+    sleep 0.3  # give sk time to open the listen socket
     while true; do
-        sleep "$REFRESH_INTERVAL"
         echo "reload($SCRIPT --list-only)" | sk --remote "$SOCKET" 2>/dev/null || true
+        sleep "$REFRESH_INTERVAL"
     done
 ) &
 REFRESHER_PID=$!
 trap 'kill "$REFRESHER_PID" 2>/dev/null; wait "$REFRESHER_PID" 2>/dev/null; true' EXIT
 
+# Start sk immediately with empty list; list is injected via IPC once socket is ready
 selection=$(
-    sorted_list \
-        | sk --listen "$SOCKET" \
-             --prompt="Claude> " \
-             --no-sort --ansi \
-             --header "auto-refresh ${REFRESH_INTERVAL}s"
+    sk --listen "$SOCKET" \
+         --prompt="Claude> " \
+         --no-sort --ansi \
+         --header "auto-refresh ${REFRESH_INTERVAL}s" \
+         < /dev/null
 ) || exit 0
 
 [[ -z "$selection" ]] && exit 0
