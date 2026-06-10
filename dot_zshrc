@@ -25,3 +25,4 @@ then
 fi
 
 [[ ! -f ~/.zsh/conf/skim-key-bindings.zsh ]] || source ~/.zsh/conf/skim-key-bindings.zsh
+[[ ! -f ~/.zsh/conf/skim-history-cache.zsh ]] || source ~/.zsh/conf/skim-history-cache.zsh
