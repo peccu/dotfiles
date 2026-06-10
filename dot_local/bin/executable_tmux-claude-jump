@@ -70,9 +70,12 @@ sorted_list() {
     build_list | sort -t$'\t' -k1,1n | cut -f2-
 }
 
-# --list-only: just output the sorted list (called by the auto-refresh background process)
+CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/tmux-claude-jump.txt"
+
+# --list-only: output sorted list and save to cache for instant display next run
 if [[ "${1:-}" == "--list-only" ]]; then
-    sorted_list
+    mkdir -p "${CACHE%/*}" 2>/dev/null || true
+    sorted_list | tee "$CACHE" 2>/dev/null
     exit 0
 fi
 
@@ -80,9 +83,13 @@ SOCKET="tmux-claude-jump-$$"
 SCRIPT="$(realpath "$0")"
 REFRESH_INTERVAL=15
 
-# Background process: initial load after sk socket is ready, then periodic refresh
+# Background process: show cache instantly if available, then live reload, then periodic
 (
     sleep 0.3  # give sk time to open the listen socket
+    if [[ -f "$CACHE" ]]; then
+        echo "reload(cat '$CACHE')" | sk --remote "$SOCKET" 2>/dev/null || true
+        sleep 0.3  # brief gap so cache renders before live reload replaces it
+    fi
     while true; do
         echo "reload($SCRIPT --list-only)" | sk --remote "$SOCKET" 2>/dev/null || true
         sleep "$REFRESH_INTERVAL"
