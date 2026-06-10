@@ -88,7 +88,7 @@ REFRESH_INTERVAL=15
     sleep 0.3  # give sk time to open the listen socket
     if [[ -f "$CACHE" ]]; then
         echo "reload(cat '$CACHE')" | sk --remote "$SOCKET" 2>/dev/null || true
-        sleep 0.3  # brief gap so cache renders before live reload replaces it
+        sleep 3  # keep cache visible long enough to select before live reload replaces it
     fi
     while true; do
         echo "reload($SCRIPT --list-only)" | sk --remote "$SOCKET" 2>/dev/null || true
