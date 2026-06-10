@@ -41,13 +41,14 @@ build_list() {
         fi
 
         # Classify the live state (priority: needs input > working > idle).
-        # "Esc to cancel" covers tool-approval and nav menus (user must act).
-        # Working detection uses spinner/timer text; "esc to interrupt" no longer
-        # appears in Claude Code >= 2.x.
-        if grep -qE 'Do you want to proceed|No, and tell Claude|❯ 1\.|to (navigate|select|approve).*[Ee]sc to cancel|opening.*esc to cancel' <<<"$content"; then
+        # Only examine the bottom of the pane: Claude Code's status indicators
+        # (spinners, dialogs) always appear near the bottom, while historical
+        # output can linger anywhere in the visible area and cause false positives.
+        recent=$(tail -12 <<<"$content")
+        if grep -qE 'Do you want to proceed|No, and tell Claude|❯ 1\.|to (navigate|select|approve).*[Ee]sc to cancel|opening.*esc to cancel' <<<"$recent"; then
             rank=0
             label="${red}⏳ needs input${reset}"
-        elif grep -qE 'Considering|Thinking\.\.\.|[0-9]+s [·•]|Claude is using your computer' <<<"$content"; then
+        elif grep -qE 'Considering|Thinking\.\.\.|[0-9]+s [·•]|Claude is using your computer' <<<"$recent"; then
             rank=2
             label="${dim}⚙  working    ${reset}"
         else
