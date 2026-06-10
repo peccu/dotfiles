@@ -72,10 +72,9 @@ sorted_list() {
 
 CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/tmux-claude-jump.txt"
 
-# --list-only: output sorted list and save to cache for instant display next run
+# --list-only: just output; the background loop handles atomic cache writes
 if [[ "${1:-}" == "--list-only" ]]; then
-    mkdir -p "${CACHE%/*}" 2>/dev/null || true
-    sorted_list | tee "$CACHE" 2>/dev/null
+    sorted_list
     exit 0
 fi
 
@@ -91,7 +90,11 @@ REFRESH_INTERVAL=15
         sleep 3  # keep cache visible long enough to select before live reload replaces it
     fi
     while true; do
-        echo "reload($SCRIPT --list-only)" | sk --remote "$SOCKET" 2>/dev/null || true
+        # Build list to a temp file first so sk only sees a fast `cat` during reload
+        mkdir -p "${CACHE%/*}" 2>/dev/null || true
+        "$SCRIPT" --list-only > "${CACHE}.tmp" 2>/dev/null || true
+        mv -f "${CACHE}.tmp" "$CACHE" 2>/dev/null || true
+        [[ -f "$CACHE" ]] && echo "reload(cat '$CACHE')" | sk --remote "$SOCKET" 2>/dev/null || true
         sleep "$REFRESH_INTERVAL"
     done
 ) &
