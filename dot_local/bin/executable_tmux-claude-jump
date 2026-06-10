@@ -40,11 +40,14 @@ build_list() {
             [[ "$ccmd" =~ ^[0-9]+\.[0-9]+ ]] || continue
         fi
 
-        # Classify the live state (priority: needs input > idle > working).
-        if grep -qE 'Do you want to proceed|Enter to select|No, and tell Claude|❯ 1\.' <<<"$content"; then
+        # Classify the live state (priority: needs input > working > idle).
+        # "Esc to cancel" covers tool-approval and nav menus (user must act).
+        # Working detection uses spinner/timer text; "esc to interrupt" no longer
+        # appears in Claude Code >= 2.x.
+        if grep -qE 'Do you want to proceed|Enter to select|No, and tell Claude|❯ 1\.|[Ee]sc to cancel' <<<"$content"; then
             rank=0
             label="${red}⏳ needs input${reset}"
-        elif grep -qE 'esc to interrupt' <<<"$content"; then
+        elif grep -qE 'Considering|Thinking\.\.\.|[0-9]+s [·•]|Claude is using your computer' <<<"$content"; then
             rank=2
             label="${dim}⚙  working    ${reset}"
         else
