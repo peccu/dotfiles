@@ -41,11 +41,15 @@ build_list() {
         fi
 
         # Classify the live state (priority: needs input > working > idle).
-        # Only examine the bottom of the pane: Claude Code's status indicators
-        # (spinners, dialogs) always appear near the bottom, while historical
-        # output can linger anywhere in the visible area and cause false positives.
-        recent=$(tail -12 <<<"$content")
-        if grep -qE 'Do you want to proceed|No, and tell Claude|❯ 1\.|to (navigate|select|approve).*[Ee]sc to cancel|opening.*esc to cancel' <<<"$recent"; then
+        # Unambiguous needs-input patterns are searched in full content (they can
+        # be pushed above the visible bottom by task lists etc.).
+        # Ambiguous patterns (Esc to cancel) use only the bottom lines to avoid
+        # matching historical conversation text.
+        recent=$(tail -15 <<<"$content")
+        if grep -qE 'Do you want to proceed|No, and tell Claude|❯ [0-9]+\.' <<<"$content"; then
+            rank=0
+            label="${red}⏳ needs input${reset}"
+        elif grep -qE '[Ee]sc to cancel [·•]|[·•] [Ee]sc to cancel|to (navigate|select|approve).*[Ee]sc to cancel|opening.*esc to cancel' <<<"$recent"; then
             rank=0
             label="${red}⏳ needs input${reset}"
         elif grep -qE 'Considering|Thinking\.\.\.|[0-9]+s [·•]|Claude is using your computer' <<<"$recent"; then
