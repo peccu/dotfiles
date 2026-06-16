@@ -1,3 +1,8 @@
 # Disable /etc/zshrc_Apple_Terminal
 SHELL_SESSIONS_DISABLE=1
 
+# Load local env exports (JIRA / Slack / GCloud / Claude tokens) in ALL shells,
+# including non-interactive ones such as the Claude Code Bash tool.
+# Single source of truth: ~/.bash/conf/0_env_local.sh (sourced here so it is no
+# longer limited to interactive zsh via ~/.zshrc -> ~/.zsh/conf -> bash conf).
+[ -f ~/.bash/conf/0_env_local.sh ] && . ~/.bash/conf/0_env_local.sh
