@@ -227,6 +227,17 @@
   },
   "model": "opus[1m]",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/block-git-add-all.sh"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
