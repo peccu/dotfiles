@@ -52,6 +52,16 @@ bind -n S-right select-pane -R
 bind-key -n M-[ switch-client -p
 bind-key -n M-] switch-client -n
 
+# use emacs-style keybindings in copy mode and at the command prompt
+# (without this, tmux auto-selects vi when $EDITOR/$VISUAL looks vi-ish)
+setw -g mode-keys emacs
+set -g status-keys emacs
+
+# Meta/Alt keys (e.g. M-v page-up in copy-mode) are sent as "ESC + key".
+# tmux waits escape-time ms for the 2nd byte; too short over mobile SSH makes
+# ESC register as a standalone key (copy-mode Escape = cancel), eating M-v.
+set -s escape-time 100
+
 # show copy mode key binds
 # bind / list-keys -T emacs-copy
 bind / list-keys -T copy-mode
