@@ -53,6 +53,8 @@ alias drun='d run --rm -it --name'
 alias drunit='d run --rm -it --name'
 alias drunbash='d run --rm -it --entrypoint bash --name'
 alias drund='d run --rm -d --name'
+alias dpsa-all='d ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.RunningFor}}\t{{.Status}}\t{{.Size}}\t{{.Names}}\t{{.Networks}}\t{{.Mounts}}\t{{.Ports}}\t{{.Labels}}"'
+alias dpsa='d ps -a --format "table {{.Names}}\t{{.ID}}\t{{.RunningFor}}\t{{.Status}}\t{{.Image}}"'
 # sort -h is clever!
 # https://www.baeldung.com/linux/docker-sort-images-by-size
 alias dim='docker image list --format "table {{.Size}}\t{{.ID}}\t{{.Repository}}:{{.Tag}}" | sort -h'
