@@ -1,0 +1,26 @@
+# -*- coding:utf-8; mode:shell-script -*-
+# ~/.bashenv — bash counterpart of ~/.zshenv.
+# Sourced by NON-interactive bash via BASH_ENV (exported from ~/.profile).
+# Interactive bash gets the same PATH via ~/.bashrc -> ~/.bash/conf/*.sh, so
+# this file exists mainly for scripts / `bash -c` on the Linux (bash) servers.
+# Shared POSIX source of truth for PATH: ~/.bash/conf/0_path.sh.
+
+# GCLOUD_MY_HOME etc. live here (machine-local); needed before 0_path.sh.
+[ -f ~/.bash/conf/0_env_local.sh ] && . ~/.bash/conf/0_env_local.sh
+[ -f ~/.bash/conf/0_path.sh ] && . ~/.bash/conf/0_path.sh
+
+# De-duplicate PATH, keeping the first occurrence (bash has no `typeset -U`).
+_dedup_path() {
+  IFS=: read -r -a _p <<< "$PATH"
+  local dir out=
+  for dir in "${_p[@]}"; do
+    case ":$out:" in
+      *":$dir:"*) ;;
+      *) out="${out:+$out:}$dir" ;;
+    esac
+  done
+  PATH=$out
+}
+_dedup_path
+unset -f _dedup_path
+unset _p

@@ -12,6 +12,9 @@ echo this is profile
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
+    # Give non-interactive bash (scripts, `bash -c`) the same env/PATH by having
+    # them source ~/.bashenv. Exported here at login so descendants inherit it.
+    export BASH_ENV="$HOME/.bashenv"
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
         . "$HOME/.bashrc"
