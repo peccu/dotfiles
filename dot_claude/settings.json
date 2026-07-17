@@ -225,7 +225,7 @@
     "disableBypassPermissionsMode": "disable",
     "additionalDirectories": []
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -265,7 +265,8 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "document-skills@anthropic-agent-skills": true
+    "document-skills@anthropic-agent-skills": true,
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -276,6 +277,7 @@
     }
   },
   "effortLevel": "high",
+  "tui": "fullscreen",
   "preferredNotifChannel": "terminal_bell",
   "teammateMode": "tmux",
   "skipAutoPermissionPrompt": true
