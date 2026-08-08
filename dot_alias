@@ -136,3 +136,6 @@ alias ds='dev-server'
 
 # Claude Code
 alias c='claude -n "$(echo "${PWD/#$HOME/~}" | awk -F/ "{for(i=1;i<NF;i++) printf substr(\$i,1,1)\"/\"; print \$NF}")"'
+
+# jina cli
+[ -x ~/Codes/misc/jina-cli/jina.sh ] && alias jina=~/Codes/misc/jina-cli/jina.sh
