@@ -224,7 +224,7 @@
     "disableBypassPermissionsMode": "disable",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "claude-opus-5",
   "hooks": {
     "PreToolUse": [
       {
