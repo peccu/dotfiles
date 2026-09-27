@@ -12,7 +12,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # https://stackoverflow.com/a/29197217
 zstyle ':completion:*' menu select
 alias emacs='~/Applications/Emacs.app/Contents/MacOS/Emacs'
-alias aws='docker run --rm -v ~/.aws:/mnt/c/Users/user/.aws --entrypoint /usr/local/bin/aws peccu/tool-in-docker:emacs-x'
+# alias aws='docker run --rm -v ~/.aws:/mnt/c/Users/user/.aws --entrypoint /usr/local/bin/aws peccu/tool-in-docker:emacs-x'
 alias awsit='docker run -it --rm -v ~/.aws:/mnt/c/Users/user/.aws --entrypoint /usr/local/bin/aws peccu/tool-in-docker:emacs-x'
 
 # load config files
