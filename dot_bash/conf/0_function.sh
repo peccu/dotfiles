@@ -360,19 +360,11 @@ function glp(){
 }
 
 function brew-leaves(){
-    brew leaves >~/.local/share/chezmoi/docs/exported_config/brew-leaves
-    brew list --cask -1 >~/.local/share/chezmoi/docs/exported_config/brew-cask-leaves
+    brew bundle dump --file=~/.local/share/chezmoi/docs/exported_config/Brewfile --force
 }
 
 function brew-sync(){
-    for i in $(cat ~/.local/share/chezmoi/docs/exported_config/brew-leaves)
-    do
-        brew install $i
-    done
-    for i in $(cat ~/.local/share/chezmoi/docs/exported_config/brew-cask-leaves)
-    do
-        brew install --cask $i
-    done
+    brew bundle install --file=~/.local/share/chezmoi/docs/exported_config/Brewfile
 }
 
 function review(){
