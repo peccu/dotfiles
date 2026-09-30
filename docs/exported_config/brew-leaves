@@ -1,4 +1,7 @@
 bash
+duckdb
 fzf
+glab
+libpq
 sk
 watchexec
