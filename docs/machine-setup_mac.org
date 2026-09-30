@@ -85,7 +85,7 @@ for Emacs and git-credential-manager etc.
 #+end_src
 **** leaves
 **** install all
-*** Emacs 29.1
+*** Emacs 29.1 (old. current using 30.2)
 needs homebrew to reduce flickering.
 
 [railwaycat/homebrew-emacsmacport: Emacs mac port formulae for the Homebrew package manager](https://github.com/railwaycat/homebrew-emacsmacport)
@@ -245,6 +245,7 @@ installed into /Applications/Emacs.app
   fd
   jq
   lazygit
+  navi
   nodejs_22
   ripgrep
   skim
@@ -261,6 +262,7 @@ installed into /Applications/Emacs.app
   fd \
   jq \
   lazygit \
+  navi \
   nodejs_22 \
   ripgrep \
   skim \
@@ -314,6 +316,15 @@ installed into /Applications/Emacs.app
 #+end_src
 **** tpm setup
 ***** setup tpm by =C-t I=
+*** google cloud, firebase
+**** gcloud
+***** =curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-arm.tar.gz=
+***** =tar xf google-cloud-cli-darwin-arm.tar.gz=
+***** =./google-cloud-sdk/install.sh=
+**** firebase
+***** =curl -sL https://firebase.tools | bash=
+*** navi : cheatsheet cli
+**** nix
 *** Fonts
 **** FiraCode Nerd Font
 ***** https://www.nerdfonts.com/font-downloads
