@@ -13,3 +13,8 @@ SHELL_SESSIONS_DISABLE=1
 # Needs GCLOUD_MY_HOME from 0_env_local.sh above, so source it after that.
 [ -f ~/.bash/conf/0_path.sh ] && . ~/.bash/conf/0_path.sh
 typeset -U path PATH   # de-duplicate; .zshrc re-sources 0_path.sh interactively
+
+# 2026-11 eMudhra CA 漏洩対応: uv と Nix 製ツールを、問題のルートを除いた証明書バンドルで検証させる。
+# 背景・確認・撤去の目安は ~/.zsh/conf/ca-check.sh（ca-check-help）を参照。
+export UV_SYSTEM_CERTS=1
+export NIX_SSL_CERT_FILE=/opt/homebrew/etc/ca-certificates/cert.pem
