@@ -49,12 +49,21 @@
 #: |---|---|---|---|
 #: | macOS 標準の curl / git / openssl / ruby / python3 | `/etc/ssl/cert.pem` | sudo | macOS のアップデート |
 #: | Homebrew（brew の python3・openssl@3 も含む） | `$(brew --prefix)/etc/ca-certificates/cert.pem` | sudo 不要 | `brew upgrade` で ca-certificates が更新されたとき |
-#: | Nix daemon（Determinate 版） | `nix.conf` の `ssl-cert-file`（例: `/etc/nix/macos-keychain.crt`） | sudo | Mac の再起動や Nix の更新（キーチェーンから作り直される） |
+#: | Nix daemon（Determinate 版） | `nix.conf` の `ssl-cert-file`（例: `/etc/nix/macos-keychain.crt`） | sudo（`determinate-nixd upgrade`） | 3.24.0 未満では daemon が起動するたび（キーチェーンから作り直される）。3.24.0 以降は戻らない |
 #: | Nix で入れたツール | `NIX_SSL_CERT_FILE`（`~/.zshenv` で Homebrew のバンドルに向けている） | 設定のみ | 戻らない |
 #: | uv | 内蔵リスト。`UV_SYSTEM_CERTS=1`（`~/.zshenv`）で OS の信頼ストアに切り替え | 設定のみ | 戻らない |
 #: | Bun | 内蔵リスト。オプション・環境変数では外せない（1.4.2 で検証済み） | 待つ | Bun の更新で解消 |
 #: | colima の VM | VM 内の `/etc/ssl/certs/ca-certificates.crt` | VM 内で sudo | VM を作り直したとき |
 #:
+#: - **Nix daemon は Determinate Nix を 3.24.0 以降に更新すれば直る。**
+#:   - `determinate-nixd` は起動のたびに macOS のキーチェーン（System Roots・System）から `/etc/nix/macos-keychain.crt` を作り直す。
+#:     2本のルートは macOS のルートストアに残っている（Apple は中間 CA をブロックしただけ）ので、3.24.0 未満では毎回2本とも戻る。
+#:   - 3.24.0 以降は作り直すときに2本を除く。2026-11-08 に 3.23.0 → 3.24.2 へ更新し、daemon の再起動後に 183 → 181 枚
+#:     （emSign と AAA が両方消えた）になったことを確認した。
+#:   - 経緯: https://github.com/DeterminateSystems/determinate/issues/216
+#:     （メンテナーの回答は「3.24.0 以降に更新を」。リリースノートには同梱 cacert の更新しか書かれていない）
+#:   - 更新コマンドは `sudo determinate-nixd upgrade`。今のバージョンは `determinate-nixd version` で分かる。
+#:   - 3.24.0 未満のまま手で除いても、daemon の再起動で戻るので一時しのぎにしかならない。
 #: - Nix daemon の設定を `nix.custom.conf` に書いても効かない。
 #:   Determinate 版の `nix.conf` は、`nix.custom.conf` を読み込む行が `ssl-cert-file` の行より前にあり、後の行が優先されるため。
 #: - 全部を `/etc/ssl/cert.pem` に向ける方法は勧めない。Homebrew や Nix daemon のバンドルにはキーチェーン由来の証明書（社内 CA など）が入っていて、
@@ -169,14 +178,28 @@ ca-check() {
   fi
 
   # --- Nix daemon ---
+  # Determinate Nix 3.24.0 以降は、キーチェーンから作り直すときに2本を除く（ca-check-help 参照）
   f=$(_ca_nix_daemon_bundle)
   if [[ -n $f && -e $f ]]; then
+    local nixver= nixlabel="Nix daemon"
+    if command -v determinate-nixd >/dev/null 2>&1; then
+      nixver=$(determinate-nixd version 2>/dev/null </dev/null | sed -n 's/.*daemon version: *//p' | head -1)
+      [[ -n $nixver ]] && nixlabel="Nix daemon（Determinate $nixver）"
+    fi
+    autoload -Uz is-at-least
     hit=$(_ca_which $f)
     if [[ -z $hit ]]; then
-      _ca_row ✅ "Nix daemon" "\`$f\`"
+      _ca_row ✅ "$nixlabel" "\`$f\`"
+    elif [[ -n $nixver ]] && ! is-at-least 3.24.0 $nixver; then
+      _ca_row ❌ "$nixlabel" "\`$f\` に残っている: $hit（3.24.0 未満。更新すれば作り直しの際に除かれる）"
+      fix_sudo+=("# Nix daemon: Determinate Nix を 3.24.0 以降に更新する（更新中に daemon が再起動し、バンドルが作り直される）")
+      fix_sudo+=("sudo determinate-nixd upgrade")
+      fix_sudo+=("determinate-nixd version   # daemon version が 3.24.0 以上になったことを確かめ、ca-check を再実行")
+      fix_sudo+=("")
     else
-      _ca_row ❌ "Nix daemon" "\`$f\` に残っている: $hit（再起動などで作り直されると戻る）"
-      fix_sudo+=("# Nix daemon（daemon の再起動は不要。ダウンロードのたびに読み込まれる）")
+      _ca_row ❌ "$nixlabel" "\`$f\` に残っている: $hit（daemon の再起動で作り直されると戻る）"
+      fix_sudo+=("# Nix daemon: 一時しのぎで手で除く（daemon の再起動は不要。ダウンロードのたびに読み込まれる）")
+      [[ -n $nixver ]] && fix_sudo+=("# 3.24.0 以降なのに残っている場合は https://github.com/DeterminateSystems/determinate/issues/216 を確認する")
       fix_sudo+=("[ -e $f.orig ] || sudo cp -p $f $f.orig")
       fix_sudo+=("t=\$(mktemp) && ca-strip-filter < $f > \"\$t\" && [ -s \"\$t\" ] && sudo sh -c \"cat '\$t' > '$f'\"; rm -f \"\$t\"")
       fix_sudo+=("")
