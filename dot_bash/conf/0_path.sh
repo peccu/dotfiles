@@ -3,6 +3,9 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 [ -d ~/.local/bin ] && export PATH=$HOME/.local/bin:$PATH
 # nix per-user profile (also added by nix's own profile scripts; dedup handles overlap)
 [ -d "$HOME/.nix-profile/bin" ] && export PATH="$HOME/.nix-profile/bin:$PATH"
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 # Google Cloud SDK — GCLOUD_MY_HOME is defined in ~/.bash/conf/0_env_local.sh.
 # Shell-agnostic replacement for gcloud's path.zsh.inc so bash gets it too.
 [ -n "$GCLOUD_MY_HOME" ] && [ -d "$GCLOUD_MY_HOME/bin" ] && export PATH="$GCLOUD_MY_HOME/bin:$PATH"
