@@ -279,5 +279,6 @@
   "tui": "fullscreen",
   "preferredNotifChannel": "terminal_bell",
   "teammateMode": "tmux",
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "agentPushNotifEnabled": true
 }
